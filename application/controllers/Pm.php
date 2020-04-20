@@ -76,7 +76,7 @@ class Pm extends CI_Controller {
 		$data['user'] = $this->db->get_where('pm', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$user = $this->db->get_where('pekerjaan',['id_pm' => $this->session->userdata('id_user')])->row_array();
-		$data['fl'] = $this->db->get_where('fl',['id_fl' =>  $user['id_fl']])->row_array();
+		$data['fl'] = $this->db->get_where('freelance',['id' =>  $user['id_fl']])->row_array();
 		$data['pekerjaan'] = $this->m_pms->get_data($id);
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('pm/views/detail',$data);

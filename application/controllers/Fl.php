@@ -119,7 +119,9 @@ class Fl extends CI_Controller {
 	{	
 		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
-		$data['pekerjaan'] = $this->m_pms->get_datafl($id);
+		$user = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
+		$data['pm'] = $this->db->get_where('pm',['id' =>  $user['id_pm']])->row_array();
+		$data['pekerjaan'] = $this->m_pms->get_data($id);
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('fl/views/detail',$data);
 		$this->load->view('template/tmplt_f');
@@ -129,7 +131,9 @@ class Fl extends CI_Controller {
 	{	
 		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
-		$data['pekerjaan'] = $this->m_pms->get_datafl($id);
+		$user = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
+		$data['pm'] = $this->db->get_where('pm',['id' =>  $user['id_pm']])->row_array();
+		$data['pekerjaan'] = $this->m_pms->get_data($id);
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('fl/views/submitpekerjaan',$data);
 		$this->load->view('template/tmplt_f');

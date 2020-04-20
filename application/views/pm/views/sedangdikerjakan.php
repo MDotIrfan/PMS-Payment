@@ -19,10 +19,12 @@
   <tbody>
     <?php foreach ($pekerjaan as $p) : ?>
       <tr data-href="<?php echo site_url('pm/view/'.$p['id_pekerjaan'])?>">
-        <th scope="row"><?php echo $p['id_pekerjaan']?></th>
+      <th scope="row"><?php echo $p['id_pekerjaan']?></th>
         <td><?php echo $p['nama_pekerjaan']?></td>
-        <td><?php echo $p['total_kata']?></td>
-        <td><?php echo $p['id_fl']?></td>
+        <td><?php echo $p['wc_xtranslated'] + $p['wc_repetition'] + $p['wc_fuzzy100'] + $p['wc_fuzzy95'] + $p['wc_fuzzy85'] + $p['wc_fuzzy75'] + $p['wc_fuzzy50'] + $p['wc_nomatch']?></td>
+        <?php $fl = $this->db->get_where('freelance',['id' =>  $p['id_fl']])->row_array();
+        ?>
+        <td><?php echo $fl['nama']?></td>
         <td><?php echo $p['status']?></td>
         <td></td>
       </tr>
