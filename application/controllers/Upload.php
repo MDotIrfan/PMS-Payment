@@ -18,7 +18,7 @@ class Upload extends CI_Controller {
         // setting konfigurasi upload
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'pdf|docx';
-        $config['file_name'] = $id;
+        $config['file_name'] = 'SLS'.$id;
         // load library upload
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('gambar')) {
@@ -36,11 +36,11 @@ class Upload extends CI_Controller {
             $data = array(
                 'id_pekerjaan' =>  $id,
                 'status' => 'Menunggu PO',
-                'file_selesai' => $id
+                'file_selesai' => 'SLS'.$id
             );
 
             $this->m_pms->updateFile($id, $data);
-            redirect('fl/');
+            redirect('fl/menunggupo');
         }
     }
 

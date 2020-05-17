@@ -65,11 +65,6 @@ class Fl extends CI_Controller {
         
 		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
-		$user = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
-		$data['fl'] = $this->db->get_where('freelance',['id' => $this->session->userdata('id_user')])->row_array();
-		$data['p'] = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
-		$data['pm'] = $this->db->get_where('pm',['id' =>  $user['id_pm']])->row_array();
-		$data['po'] = $this->m_pms->get_dataflsiapinvoice();
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('fl/views/siapinvoice',$data);
 		$this->load->view('template/tmplt_f');
@@ -121,6 +116,10 @@ class Fl extends CI_Controller {
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$user = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
 		$data['pm'] = $this->db->get_where('pm',['id' =>  $user['id_pm']])->row_array();
+		$user2 = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id])->row_array();
+		$data['po'] = $this->db->get_where('po',['id_pekerjaan' =>  $user2['id_pekerjaan']])->row_array();
+		$po = $this->db->get_where('po',['id_pekerjaan' =>  $user2['id_pekerjaan']])->row_array();
+		$data['i'] = $this->db->get_where('invoice',['id_po' =>  $po['id_po']])->row_array();
 		$data['pekerjaan'] = $this->m_pms->get_data($id);
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('fl/views/detail',$data);
@@ -160,17 +159,25 @@ class Fl extends CI_Controller {
 				);
 				$this->db->insert('invoice',$data);
 		}
-		redirect('fl/generatepo/'.$id_invoice);
+		$this->generateinv($id_invoice);
+		redirect('fl/sudahinvoice/');
 	}
 
-	function generatepo($id=NULL){
-		$user = $this->db->get_where('invoice',['id_invoice' => $id])->row_array();
-		$data['invoice'] = $this->db->get_where('invoice',['id_invoice' => $id])->row_array();
-		$data['po'] = $this->db->get_where('po',['id_po' => $user['id_po']])->row_array();
-		$po = $this->db->get_where('po',['id_po' => $user['id_po']])->row_array();
-		$data['p'] = $this->db->get_where('pekerjaan', ['id_pekerjaan' =>  $po['id_pekerjaan']])->result_array();
-		$data['pm'] = $this->db->get_where('pm', ['id' =>  $po['id_pm']])->result_array();
-		$data['fl'] = $this->db->get_where('freelance',['id' =>  $po['id_fl']])->row_array();
-		$this->load->view('fl/views/invoice',$data);
+	function generateinv($id=NULL){
+		$data['i']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl AND pm.id = po.id_pm and f.id = '". $this->session->userdata('id_user')."' and i.id_invoice='".$id."'")->result_array();
+		$data['fl']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl and f.id = '". $this->session->userdata('id_user')."'GROUP BY f.id")->result_array();
+		foreach ($data['i'] as $p){
+			$data['pm']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND pm.id = po.id_pm and pm.id = '". $p['id_pm']."' GROUP BY pm.id")->result_array();
+		}
+		$data['inv']=$this->db->get_where('invoice', ['id_invoice'=>$id])->row_array();
+		$this->load->library('pdfgenerator');
+		$html=$this->load->view('fl/views/invoice',$data,true);
+		$this->pdfgenerator->generate($html,$id);
+		foreach ($data['i'] as $p){
+			$data = array(
+				'status' => 'Sudah Invoice',
+			);
+			$this->m_pms->updatePekerjaan($p['id_pekerjaan'], $data);
+		}
 	}
 }

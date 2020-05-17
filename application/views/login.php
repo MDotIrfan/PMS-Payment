@@ -22,7 +22,7 @@
     <!-- Login Form -->
         <?php echo form_open('welcome/ceklogin'); ?>
       <input type="text" id="login" class="fadeIn second" name="username" >
-      <input type="text" id="password" class="fadeIn third" name="password">
+      <input type="password" id="password" class="fadeIn third" name="password">
       <input type="submit" class="fadeIn fourth" value="Log In" name="login">
         <?php echo form_close(); ?>
 

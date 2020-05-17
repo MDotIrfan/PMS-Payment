@@ -7,7 +7,8 @@ class Pm extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('m_pms');
-		$this->load->helper('url_helper');	
+		$this->load->helper('url_helper');
+		$this->load->helper('url');	
 	}
 
 	public function index($page = 'home')
@@ -77,6 +78,10 @@ class Pm extends CI_Controller {
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$user = $this->db->get_where('pekerjaan',['id_pm' => $this->session->userdata('id_user')])->row_array();
 		$data['fl'] = $this->db->get_where('freelance',['id' =>  $user['id_fl']])->row_array();
+		$user2 = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id])->row_array();
+		$data['po'] = $this->db->get_where('po',['id_pekerjaan' =>  $user2['id_pekerjaan']])->row_array();
+		$po = $this->db->get_where('po',['id_pekerjaan' =>  $user2['id_pekerjaan']])->row_array();
+		$data['i'] = $this->db->get_where('invoice',['id_po' =>  $po['id_po']])->row_array();
 		$data['pekerjaan'] = $this->m_pms->get_data($id);
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('pm/views/detail',$data);
@@ -120,21 +125,25 @@ class Pm extends CI_Controller {
 			'id_pm' => $id_pm
 			);
 			$this->db->insert('po',$data);
-		redirect('pm/generatepo/'.$id_pekerjaan);
+		$this->generatepo($id_pekerjaan);
+		redirect('pm/siapinvoice');
 	}
 
 	function generatepo($id=NULL){
-		$user = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id])->row_array();
-		$po = $this->db->get_where('po',['id_pekerjaan' => $id])->row_array();
-		$data['po'] = $this->db->get_where('po',['id_pekerjaan' => $id])->row_array();
-		$data['p'] = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id])->row_array();
-		$data['pm'] = $this->db->get_where('pm', ['id' =>  $user['id_pm']])->row_array();
+		$data['user'] = $this->db->get_where('pm', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$user = $this->db->get_where('pekerjaan',['id_pekerjaan' =>$id])->row_array();
 		$data['fl'] = $this->db->get_where('freelance',['id' =>  $user['id_fl']])->row_array();
-		$this->load->library('pdf');
-
-		$this->pdf->setPaper('A4', 'potrait');
-		$this->pdf->filename = $po['id_po'].".pdf";
-		$this->pdf->load_view('pm/views/po', $data);
-		redirect('pm/');
+		$data['pm'] = $this->db->get_where('pm',['id' =>  $user['id_pm']])->row_array();
+		$data['po'] = $this->db->get_where('po',['id_pekerjaan' =>  $user['id_pekerjaan']])->row_array();
+		$data['p'] = $this->db->get_where('pekerjaan',['id_pekerjaan' =>  $user['id_pekerjaan']])->row_array();
+		$this->load->library('pdfgenerator');
+		$html=$this->load->view('pm/views/po',$data, true);
+		$this->pdfgenerator->generate($html,'PO-'.$user['id_pekerjaan']);
+		$data = array(
+			'id_pekerjaan' =>  $id,
+			'status' => 'Siap Invoice',
+		);
+		$this->m_pms->updatePekerjaan($id, $data);
 	}
 }

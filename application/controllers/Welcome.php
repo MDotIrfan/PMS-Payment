@@ -28,7 +28,7 @@ class Welcome extends CI_Controller {
 				];
 				$this->session->set_userdata($data);
 				if($user['level']== 'admin'){
-					redirect('pm/');
+					redirect('admin/');
 				} elseif($user['level'] == 'fl'){
 					redirect('fl/');
 				} elseif($user['level'] == 'pm'){

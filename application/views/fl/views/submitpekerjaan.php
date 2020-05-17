@@ -83,7 +83,7 @@
         ?>
         <input type="hidden" name="id" value="<?php echo $pekerjaan['id_pekerjaan'] ?>">
         <input type="file" name="gambar">
-        <button type="submit">Upload Gambar</button>
+        <button type="submit">Upload File</button>
         <?php echo form_close(); ?>
 </p>
 </div>

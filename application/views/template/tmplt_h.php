@@ -30,7 +30,7 @@
           <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
               <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
-                  Welcome, <?php echo $user['nama']?> <b class="caret"></b>
+                  Welcome, <?php if($level['level']=='fl' || $level['level']=='pm') {echo $user['nama'];} else {echo $level['username'];}?> <b class="caret"></b>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#"><i class="fa fa-user mx"></i>Profile</a>
@@ -54,7 +54,7 @@
                     <small>MAIN MENU</small>
                 </li>
                 <?php if($level['level']=='fl'){ ?>
-                <a href="./" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <a href="<?php echo base_url(); ?>" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Dashboard</span>
@@ -68,25 +68,25 @@
                     </div>
                 </a>
                 <div id='submenu1' class="collapse sidebar-submenu">
-                    <a href="./sedangdikerjakan" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>fl/sedangdikerjakan" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Sedang Dikerjakan</span>
                     </a>
-                    <a href="./menunggupo" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>fl/menunggupo" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Menunggu PO</span>
                     </a>
-                    <a href="./siapinvoice" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>fl/siapinvoice" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Siap Invoice</span>
                     </a>
-                    <a href="./sudahinvoice" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>fl/sudahinvoice" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Sudah di Invoice</span>
                     </a>
-                    <a href="./selesaipembayaran" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>fl/selesaipembayaran" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Selesai Pembayaran</span>
                     </a>
                 </div>
                 <?php } ?>
                 <?php if($level['level']=='pm'){ ?>
-                <a href="./" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <a href="<?php echo base_url(); ?>pm" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Dashboard</span>
@@ -100,13 +100,13 @@
                     </div>
                 </a>
                 <div id='submenu1' class="collapse sidebar-submenu">
-                    <a href="./sedangdikerjakan" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>pm/sedangdikerjakan" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Sedang Dikerjakan</span>
                     </a>
-                    <a href="./menunggupo" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>pm/menunggupo" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Menunggu PO</span>
                     </a>
-                    <a href="./siapinvoice" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="<?php echo base_url(); ?>pm/siapinvoice" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Siap Invoice</span>
                     </a>
                 </div>

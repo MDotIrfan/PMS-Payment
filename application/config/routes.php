@@ -71,6 +71,10 @@ $route['finance/tambah'] = 'finance/tambah';
 $route['po'] = 'welcome/po';
 $route['invoice'] = 'welcome/invoice';
 
+$route['admin'] = 'admin/home';
+$route['admin/ubah/(:any)'] = 'admin/ubahdata/$1';
+$route['admin/hapusdata/(:any)'] = 'admin/hapus/$1';
+
 $route['default_controller'] = 'welcome/login';
 $route['(:any)'] = 'welcome/pm/$1';
 

@@ -85,11 +85,23 @@ class m_pms extends CI_Model {
         return $this->db->get_where('pekerjaan', array('id_pekerjaan' => $id))->row_array();
     }
 
+    public function get_datamasterpekerjaan($id = FALSE){
+        if($id === FALSE){
+            return $this->db->get('pekerjaan')->result_array();
+        }
+        return $this->db->get_where('pekerjaan', array('id_pekerjaan' => $id))->row_array();
+    }
+
+
     public function getDataByID($id){
         return $this->db->get_where('pekerjaan', array('id_pekerjaan'=>$id));
     }
 
     public function updateFile($id, $data){
+        $this->db->where('id_pekerjaan', $id);
+        return $this->db->update('pekerjaan', $data);
+    }
+    public function updatePekerjaan($id, $data){
         $this->db->where('id_pekerjaan', $id);
         return $this->db->update('pekerjaan', $data);
     }

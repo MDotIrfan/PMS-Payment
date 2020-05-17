@@ -202,11 +202,11 @@ html {
     transform: scale(0.95);
   }
   
-  input[type=text] {
+  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
-    padding: 15px 32px;
+    padding: 15px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -223,17 +223,15 @@ html {
     border-radius: 5px 5px 5px 5px;
   }
   
-  input[type=text]:focus {
+  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
   
-  input[type=text]:placeholder {
+  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date]:placeholder {
     color: #cccccc;
   }
 
-  
-  
   /* ANIMATIONS */
   
   /* Simple CSS3 Fade-in-down Animation */
