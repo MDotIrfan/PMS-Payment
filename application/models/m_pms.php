@@ -105,6 +105,19 @@ class m_pms extends CI_Model {
         $this->db->where('id_pekerjaan', $id);
         return $this->db->update('pekerjaan', $data);
     }
+    public function get_idkerja(){
+        $cd = $this->db->query("SELECT MAX(RIGHT(id_pekerjaan,3)) AS kd_max FROM pekerjaan");
+        $kd = "";
+        if($cd->num_rows()>0){
+            foreach($cd->result() as $k){
+                $tmp = ((int)$k->kd_max)+1;
+                $kd = sprintf("%03s", $tmp);
+            }
+        }else{
+            $kd = "001";
+        }
+        return "TS".$kd;
+    }
 }
 
 ?>

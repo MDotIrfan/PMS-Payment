@@ -22,13 +22,14 @@ class Admin extends CI_Controller {
 
 	public function tambahdata()
 	{
+		$x['nota']=$this->m_pms->get_idkerja();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['pm'] = $this->db->get('pm')->result_array();
 		$data['fl'] = $this->db->get('freelance')->result_array();
 		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
 		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
 		$this->load->view('template/tmplt_h',$data);
-		$this->load->view('admin/tambah');
+		$this->load->view('admin/tambah',$x);
 		$this->load->view('template/tmplt_f');
 	}
 
