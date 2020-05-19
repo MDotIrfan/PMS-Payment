@@ -54,9 +54,16 @@ body {
     font-size: 0.9rem;
 }
 
+.fa-bell{
+  color: #fff;
+}
+
+.fa-envelope{
+  color: #fff;
+}
 
 .sidebar-separator-title {
-    background-color: #333;
+    background-color: #000;
     height: 35px;
 }
 .sidebar-separator {
@@ -88,9 +95,9 @@ body {
 
 /* BASIC */
 
-html {
+/* html {
     background-color:white;
-  }
+  } */
   
   /* body {
     font-family: "Poppins", sans-serif;
@@ -169,7 +176,7 @@ html {
   /* FORM TYPOGRAPHY*/
   
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: #ad003c;
     border: none;
     color: white;
     padding: 15px 80px;
@@ -191,7 +198,7 @@ html {
   }
   
   input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #39ace7;
+    background-color: #ad003c;
   }
   
   input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -225,7 +232,7 @@ html {
   
   textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #ad003c;
   }
   
   textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date]:placeholder {

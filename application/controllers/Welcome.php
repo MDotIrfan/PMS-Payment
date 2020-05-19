@@ -37,7 +37,7 @@ class Welcome extends CI_Controller {
 					redirect('finance/');
 				}
 			} else {
-				redirect('welcome/login');
+				redirect(base_url('/'));
 			}
 		}
 	}
@@ -45,7 +45,7 @@ class Welcome extends CI_Controller {
 	public function logout(){
 		$this->session->unset_userdata('id_user');
 		$this->session->unset_userdata('level');
-		redirect('welcome/login');
+		redirect(base_url('/'));
 	}
 
 	public function po(){

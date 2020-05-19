@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0003364c64.js" crossorigin="anonymous"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/style.css">
     <title>STAR Project Management System</title>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ad003c">
         <div class="container-fluid ml-auto">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">PMS STAR</a>
+            <a class="navbar-brand" href="#" style="color: white; font-weight: bold">PMS STAR</a>
           </div>
           <div class="icon ml-auto">
             <h5>
@@ -29,7 +29,7 @@
         </div>
           <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-              <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+              <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false" style="color:white"> 
                   Welcome, <?php if($level['level']=='fl' || $level['level']=='pm') {echo $user['nama'];} else {echo $level['username'];}?> <b class="caret"></b>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
@@ -54,7 +54,7 @@
                     <small>MAIN MENU</small>
                 </li>
                 <?php if($level['level']=='fl'){ ?>
-                <a href="<?php echo base_url(); ?>" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <a href="<?php echo base_url();?>fl/" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Dashboard</span>

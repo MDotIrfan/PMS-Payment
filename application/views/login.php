@@ -9,14 +9,15 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
+<body style="background-color:#a40139 ">
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <h1>Login Project Management System STAR</h1>
+      <img src="./images/sslogostar.PNG" alt="">
+      <h1>Project Management System</h1>
     </div>
 
     <!-- Login Form -->

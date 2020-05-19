@@ -65,7 +65,8 @@
                         <td><?php echo $pekerjaan['w_nomatch'], '%'?></td>
                         <td><?php echo $pekerjaan['wc_nomatch'] * $pekerjaan['w_nomatch'] / 100?></td>
                     </tr>
-                    <?php $totalw = ($pekerjaan['wc_xtranslated'] * $pekerjaan['w_xtranslated']/ 100) + ( $pekerjaan['wc_repetition'] * $pekerjaan['w_repetition']/ 100) + ($pekerjaan['wc_fuzzy100'] * $pekerjaan['w_fuzzy100']/ 100) 
+                    <?php $totalw = 0; 
+                    $totalw = ($pekerjaan['wc_xtranslated'] * $pekerjaan['w_xtranslated']/ 100) + ( $pekerjaan['wc_repetition'] * $pekerjaan['w_repetition']/ 100) + ($pekerjaan['wc_fuzzy100'] * $pekerjaan['w_fuzzy100']/ 100) 
                         + ($pekerjaan['wc_fuzzy95'] * $pekerjaan['w_fuzzy95']/ 100) + ($pekerjaan['wc_fuzzy85'] * $pekerjaan['w_fuzzy85']/ 100) 
                         + ($pekerjaan['wc_fuzzy75'] * $pekerjaan['w_fuzzy75']/ 100) + ($pekerjaan['wc_fuzzy50'] * $pekerjaan['w_fuzzy50']/ 100) + ($pekerjaan['wc_nomatch'] * $pekerjaan['w_nomatch']/ 100); ?>
                     <tr>

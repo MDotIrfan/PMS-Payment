@@ -2,7 +2,7 @@
         <div class="col">
             
             <h1>
-                Siap Invoice
+                Sudah Invoice
             </h1>
             <br>
 <table class="table table-striped">

@@ -1,8 +1,8 @@
         <!-- MAIN -->
         <div class="col">
-            
+           <br> 
             <h1>
-                Daftar Pekerjaan
+                Sedang Dikerjakan
             </h1>
             <br>
 <table class="table table-striped">

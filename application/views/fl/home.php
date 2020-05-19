@@ -1,37 +1,34 @@
         <!-- MAIN -->
         <div class="col">
-            
-            <h1>
-                Dashboard
-            </h1>
-            <br>
-<!-- <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Task Name</th>
-      <th scope="col">Total Kata</th>
-      <th scope="col">PM</th>
-      <th scope="col">Status</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($pekerjaan as $p) : ?>
-      <tr>
-        <th scope="row"><?php echo $p['id_pekerjaan']?></th>
-        <td><?php echo $p['nama_pekerjaan']?></td>
-        <td><?php echo $p['total_kata']?></td>
-        <td><?php echo $p['id_pm']?></td>
-        <td><?php echo $p['status']?></td>
-        <td><?php if($p['status']=='Sedang Dikerjakan'){?><a href="<?php echo site_url('fl/view/'.$p['id_pekerjaan'])?>"><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-  Submit pekerjaan
-        </button></a><?php } elseif($p['status']=='Siap Invoice'){ ?><a href="<?php echo site_url('fl/buatinvoice/'.$p['id_pekerjaan'])?>"><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-  Buat Invoice
-        </button></a><?php } ?></td>
-      </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table> -->
-
+        <br>
+<div class="row w-100">
+        <div class="col-md-3">
+            <div class="card border-info mx-sm-1 p-3">
+                <div class="card border-info shadow text-info p-3 my-card bg" >Sedang Dikerjakan</span></div>
+                <div class="text-info text-center mt-3"><h4></h4></div>
+                <div class="text-info text-center mt-2"><h1><?php echo count($psd)?></h1></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success mx-sm-1 p-3">
+                <div class="card border-success shadow text-success p-3 my-card">Menunggu PO</div>
+                <div class="text-success text-center mt-3"><h4></h4></div>
+                <div class="text-success text-center mt-2"><h1><?php echo count($pmp)?></h1></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-danger mx-sm-1 p-3">
+                <div class="card border-danger shadow text-danger p-3 my-card" >Siap Invoice</div>
+                <div class="text-danger text-center mt-3"></div>
+                <div class="text-danger text-center mt-2"><h1><?php echo count($psi)?></h1></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning mx-sm-1 p-3">
+                <div class="card border-warning shadow text-warning p-3 my-card" >Sudah Invoice</div>
+                <div class="text-warning text-center mt-3"></div>
+                <div class="text-warning text-center mt-2"><h1><?php echo count($psudi)?></h1></div>
+            </div>
+        </div>
+     </div>
         </div>

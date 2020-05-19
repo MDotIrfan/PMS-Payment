@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Purchase Order</title>
+    <style type="text/css">
+    .bold {
+        font-weight: bold;
+    }
+  </style>
   </head>
   <body>   
     <table border="0" style="width: 100%">
@@ -18,7 +23,7 @@
                     <?php echo $fl['email_fl']; endforeach;?></td>
         </tr>
         <tr>
-            <td>Bill To : <br>
+            <td><br>Bill To : <br>
                    <?php 
                     foreach($pm as $pm) {
                         echo $pm['nama'].",";
@@ -28,23 +33,30 @@
             <td></td>
         </tr>
         <tr>
-            <td>PT.STAR Software Indonesia <br>
-                    CityLofts Sudirman, Unit 2109 <br>
-                    Jalan K.H Mas Mansyur No.121 <br>
-                    Jakarta 10220 <br>
-                    INDONESIA</td>
+            <td><p>
+            PT.STAR Software Indonesia <br>
+            CityLofts Sudirman, Unit 2109 <br>
+            Jalan K.H Mas Mansyur No.121 <br>
+            Jakarta 10220 <br>
+            INDONESIA
+            </p></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td></td>
-            <td>Invoice</td>
+            <td class="bold" style="text-decoration-line: underline">Invoice</td>
             <td></td>
         </tr>
         <tr>
             <td></td>
-            <td><?php echo $inv['id_invoice'];  $a = 1;
+            <td style="font-style: italic"><?php echo $inv['id_invoice'];  $a = 1;
                       $total = 0; ?></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><br></td>
+            <td style="font-style: italic"></td>
             <td></td>
         </tr>
     </table>
@@ -75,24 +87,29 @@
                     </tr>
                 </tbody>
             </table>
+            <tr>
+            <td><br></td>
+            <td style="font-style: italic"></td>
+            <td></td>
+        </tr>
             <table style="width: 100%">
                 <tr>
-                    <td>Please Send your payment to<br>
+                    <td><br>Please Send your payment to<br>
                     Name            : <?php echo $fl['nama'];?><br>
                     Bank            : <?php echo $i['bank'];?><br>
-                    account number  : <?php echo $i['no_akun'];?></td>
+                    <br>account number  : <?php echo $i['no_akun'];?></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Thank you for your cooperation.<br></td>
+                    <td class="bold"><p>Thank you for your cooperation.</p><br></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td>Yogyakarta, <?php echo $i['tgl'];?><br>
+                    <td><br>Yogyakarta, <?php echo $i['tgl'];?><br>
                     <br>
                     <?php echo $i['nama'];?></td>
                 </tr>
