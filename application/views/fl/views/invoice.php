@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td></td>
-            <td class="bold" style="text-decoration-line: underline">Invoice</td>
+            <td class="bold" style="text-decoration-line: underline; text-align: center">Invoice</td>
             <td></td>
         </tr>
         <tr>

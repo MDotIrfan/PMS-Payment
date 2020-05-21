@@ -65,7 +65,7 @@ $route['upload'] = 'upload';
 $route['pm/generatepo/(:any)'] = 'pm/generatepo/$1';
 
 $route['finance'] = 'finance';
-$route['finance/(:any)'] = 'finance/view/$1';
+$route['finance/view/(:any)'] = 'finance/view/$1';
 $route['finance/tambah'] = 'finance/tambah';
 
 $route['po'] = 'welcome/po';
