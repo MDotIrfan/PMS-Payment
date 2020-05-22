@@ -46,6 +46,49 @@ class Admin extends CI_Controller {
 		$this->load->view('template/tmplt_f');
 	}
 
+	public function kirimemail($id=NULL){
+		$data['p'] = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $id])->row_array();
+		$data['fl'] = $this->db->get_where('freelance', ['id' => $data['p']['id_fl']])->row_array();
+		// Konfigurasi email
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'muhammadirfan.9f@gmail.com',  // Email gmail
+            'smtp_pass'   => 'weseisa123',  // Password gmail
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+
+        // Load library email dan konfigurasinya
+        $this->load->library('email', $config);
+
+        // Email dan nama pengirim
+        $this->email->from('no-reply@star.com', 'star.com');
+
+        // Email penerima
+        $this->email->to($data['fl']['email_fl']); // Ganti dengan email tujuan
+
+        // Lampiran email, isi dengan url/path file
+        $this->email->attach(base_url('uploads/'.$data['p']['file_asal'].'.pdf'));
+
+        // Subject email
+        $this->email->subject('Pekerjaan Baru');
+
+        // Isi email
+        $this->email->message("berikut adalah pekerjaan baru untuk anda");
+
+        // Tampilkan pesan sukses atau error
+        if ($this->email->send()) {
+            echo 'Sukses! email berhasil dikirim.';
+        } else {
+            echo 'Error! email tidak dapat dikirim.';
+        }
+	}
+
 	function do_upload() {
         $this->load->helper('url');
         $id = $this->input->post('id_pekerjaan');
@@ -97,7 +140,8 @@ class Admin extends CI_Controller {
                 'file_asal' => $id
             );
 
-            $this->db->insert('pekerjaan',$data);
+			$this->db->insert('pekerjaan',$data);
+			$this->kirimemail($id);
             redirect('admin/');
 		}
 	}

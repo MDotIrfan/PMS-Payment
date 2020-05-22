@@ -147,6 +147,53 @@ class Pm extends CI_Controller {
 			'status' => 'Siap Invoice',
 		);
 		$this->m_pms->updatePekerjaan($id, $data);
+		$this->kirimemail($id);
 		// $this->load->view('pm/views/po',$data);
 	}
+
+	public function kirimemail($id=NULL){
+		$data['po'] = $this->db->get_where('po', ['id_pekerjaan' => $id])->row_array();
+		$data['p'] = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $id])->row_array();
+		$data['fl'] = $this->db->get_where('freelance', ['id' => $data['p']['id_fl']])->row_array();
+		$data['pm'] = $this->db->get_where('pm', ['id' => $data['p']['id_pm']])->row_array();
+		// Konfigurasi email
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'muhammadirfan.9f@gmail.com',  // Email gmail
+            'smtp_pass'   => 'weseisa123',  // Password gmail
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+
+        // Load library email dan konfigurasinya
+        $this->load->library('email', $config);
+
+        // Email dan nama pengirim
+        $this->email->from('no-reply@star.com', 'star.com');
+
+        // Email penerima
+        $this->email->to($data['fl']['email_fl']); // Ganti dengan email tujuan
+
+        // Lampiran email, isi dengan url/path file
+        $this->email->attach(base_url('uploads/'.$data['po']['id_po'].'.pdf'));
+
+        // Subject email
+        $this->email->subject('Purchase Order Selesai Dibuat');
+
+        // Isi email
+        $this->email->message("Purchase Order baru telah dibuat oleh ".$data['pm']['nama']);
+
+        // Tampilkan pesan sukses atau error
+        if ($this->email->send()) {
+            echo 'Sukses! email berhasil dikirim.';
+        } else {
+            echo 'Error! email tidak dapat dikirim.';
+        }
+	}
+
 }

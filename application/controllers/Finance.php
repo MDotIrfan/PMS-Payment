@@ -91,6 +91,7 @@ class Finance extends CI_Controller {
 				'status' => 'Selesai Pembayaran',
 			);
 			$this->m_pms->updatePekerjaan($p['id_pekerjaan'], $data);
+			$this->kirimemail($p['id_pekerjaan']);
 		}
 		redirect('finance/selesaipembayaran');
 	}
@@ -101,5 +102,49 @@ class Finance extends CI_Controller {
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('finance/views/tambahdata');
 		$this->load->view('template/tmplt_f');
+	}
+
+	public function kirimemail($id=NULL){
+		$data['p'] = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $id])->row_array();
+		$data['fl'] = $this->db->get_where('freelance', ['id' => $data['p']['id_fl']])->row_array();
+		$data['fin'] = $this->db->get_where('finance', ['id' => $this->session->userdata('id_user')])->row_array();
+		// Konfigurasi email
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'muhammadirfan.9f@gmail.com',  // Email gmail
+            'smtp_pass'   => 'weseisa123',  // Password gmail
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+
+        // Load library email dan konfigurasinya
+        $this->load->library('email', $config);
+
+        // Email dan nama pengirim
+        $this->email->from('no-reply@star.com', 'star.com');
+
+        // Email penerima
+        $this->email->to($data['fl']['email_fl']); // Ganti dengan email tujuan
+
+        // Lampiran email, isi dengan url/path file
+        //$this->email->attach(base_url('uploads/'.$data['inv']['id_invoice'].'.pdf'));
+
+        // Subject email
+        $this->email->subject('Invoice Telah Dibayarkan');
+
+        // Isi email
+        $this->email->message("Pekerjaan ".$data['p']['nama_pekerjaan']." telah dibayarkan oleh ".$data['fin']['nama']);
+
+        // Tampilkan pesan sukses atau error
+        if ($this->email->send()) {
+            echo 'Sukses! email berhasil dikirim.';
+        } else {
+            echo 'Error! email tidak dapat dikirim.';
+        }
 	}
 }
