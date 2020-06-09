@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Apr 2020 pada 10.04
+-- Waktu pembuatan: 09 Jun 2020 pada 13.38
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.3
 
@@ -30,16 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `finance` (
   `id` varchar(10) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL
+  `nama` varchar(100) DEFAULT NULL,
+  `email_finance` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `finance`
 --
 
-INSERT INTO `finance` (`id`, `nama`) VALUES
-('FN001', 'Finance Example 1'),
-('FN002', 'Finance Example 2');
+INSERT INTO `finance` (`id`, `nama`, `email_finance`) VALUES
+('FN001', 'Finance Example 1', 'finstarna2@gmail.com'),
+('FN002', 'Finance Example 2', '0');
 
 -- --------------------------------------------------------
 
@@ -65,8 +66,8 @@ CREATE TABLE `freelance` (
 --
 
 INSERT INTO `freelance` (`id`, `nama`, `no_telp_fl`, `no_hp_fl`, `email_fl`, `rate`, `bank`, `no_akun`, `bahasa_awal`, `bahasa_akhir`) VALUES
-('FL001', 'Freelance Example 1', '', '0875754368', 'fl1@example.cpm', 70, 'BCA', '0083637266', 'Inggris', 'Indonesia'),
-('FL002', 'Freelance Example 2', '', '0877996699', 'fl2@example', 100, '', '', '', '');
+('FL001', 'Freelance Example 1', '', '0875754368', 'freelnastar1@gmail.com', 70, 'BCA', '0083637266', 'Inggris', 'Indonesia'),
+('FL002', 'Freelance Example 2', '', '0877996699', 'freelnastar2@gmail.com', 100, 'BNI', '7846374', 'German', 'Indonesia');
 
 -- --------------------------------------------------------
 
@@ -75,10 +76,20 @@ INSERT INTO `freelance` (`id`, `nama`, `no_telp_fl`, `no_hp_fl`, `email_fl`, `ra
 --
 
 CREATE TABLE `invoice` (
-  `id_invoice` varchar(10) DEFAULT NULL,
+  `id_invoice` varchar(20) DEFAULT NULL,
   `tgl` date DEFAULT NULL,
   `id_po` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `invoice`
+--
+
+INSERT INTO `invoice` (`id_invoice`, `tgl`, `id_po`) VALUES
+('I-06090220am', '2020-06-09', 'PO-TS001'),
+('I-06090220am', '2020-06-09', 'PO-TS002'),
+('I-06090250am', '2020-06-09', 'PO-TS003'),
+('I-06090250am', '2020-06-09', 'PO-TS004');
 
 -- --------------------------------------------------------
 
@@ -122,14 +133,10 @@ CREATE TABLE `pekerjaan` (
 --
 
 INSERT INTO `pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `id_pm`, `id_fl`, `status`, `file_asal`, `file_selesai`, `detail`, `deadline`, `wc_xtranslated`, `w_xtranslated`, `wc_repetition`, `w_repetition`, `wc_fuzzy100`, `w_fuzzy100`, `wc_fuzzy95`, `w_fuzzy95`, `wc_fuzzy85`, `w_fuzzy85`, `wc_fuzzy75`, `w_fuzzy75`, `wc_fuzzy50`, `w_fuzzy50`, `wc_nomatch`, `w_nomatch`, `bahasa_asal`, `bahasa_target`, `currency`) VALUES
-('TS001', 'Translate Example 1', 'PM001', 'FL001', 'Siap Invoice', '', '', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', ''),
-('TS002', 'Translate Example 2', 'PM002', 'FL002', 'Sedang Dikerjakan', '', '', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', ''),
-('TS003', 'Project Example 3', 'PM001', 'FL001', 'Menunggu PO', '', '', '', '2020-04-01', 0, 0, 0, 0, 0, 0, 0, 30, 0, 50, 0, 70, 0, 100, 5751, 100, 'Inggris', 'Indonesia', 'IDR'),
-('TS004', 'project example 4', 'PM001', 'FL001', 'Sudah Invoice', '', 'TS004', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', ''),
-('TS005', 'Project Example 5', 'PM002', 'FL002', 'Selesai Pembayaran', '', '', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', ''),
-('TS007', 'Project Example 7', 'PM001', 'FL001', 'Menunggu PO', '', 'TS007', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', ''),
-('TS008', 'Project Example 8', 'PM001', 'FL001', 'Sedang Dikerjakan', 'TS008', '', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', ''),
-('TS009', 'project example 9', 'PM001', 'FL001', 'Selesai Pembayaran', '', '', '', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', '');
+('TS001', 'Project Example 1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS001.rar', 'SLSTS001.zip', 'tes 1', '2020-06-10', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1900, 100, 'Inggris', 'Indonesia', 'IDR'),
+('TS002', 'Project Example 2', 'PM002', 'FL001', 'Selesai Pembayaran', 'TS002.pdf', 'SLSTS002.zip', 'tes 2', '2020-06-10', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1808, 100, 'German', 'Indonesia', 'IDR'),
+('TS003', 'Project Example 3', 'PM001', 'FL002', 'Selesai Pembayaran', 'TS003.rar', 'SLSTS003.zip', 'test 2', '2020-06-10', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1200, 100, 'German', 'Indonesia', 'IDR'),
+('TS004', 'Project Example 4', 'PM002', 'FL002', 'Selesai Pembayaran', 'TS004.rar', 'SLSTS004.zip', 'test 2', '2020-06-10', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 100, 'German', 'Indonesia', 'IDR');
 
 -- --------------------------------------------------------
 
@@ -141,16 +148,17 @@ CREATE TABLE `pm` (
   `id` varchar(10) NOT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `no_telp_pm` varchar(15) NOT NULL,
-  `fax_pm` varchar(15) NOT NULL
+  `fax_pm` varchar(15) NOT NULL,
+  `email_pm` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pm`
 --
 
-INSERT INTO `pm` (`id`, `nama`, `no_telp_pm`, `fax_pm`) VALUES
-('PM001', 'Project Manager Example 1', '0893648637', '0893648783'),
-('PM002', 'Project Manager Example 2', '0894637254', '0876478394');
+INSERT INTO `pm` (`id`, `nama`, `no_telp_pm`, `fax_pm`, `email_pm`) VALUES
+('PM001', 'Project Manager Example 1', '0893648637', '0893648783', 'pmstarna1@gmail.com'),
+('PM002', 'Project Manager Example 2', '0894637254', '0876478394', 'pmstarna2@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -172,7 +180,10 @@ CREATE TABLE `po` (
 --
 
 INSERT INTO `po` (`id_po`, `tgl`, `id_pekerjaan`, `total_bayar`, `id_fl`, `id_pm`) VALUES
-('PO-TS003', '2020-04-14', 'TS003', 402570, 'FL001', 'PM001');
+('PO-TS001', '2020-06-09', 'TS001', 133000, 'FL001', 'PM001'),
+('PO-TS002', '2020-06-09', 'TS002', 126560, 'FL001', 'PM002'),
+('PO-TS003', '2020-06-09', 'TS003', 120000, 'FL002', 'PM001'),
+('PO-TS004', '2020-06-09', 'TS004', 100000, 'FL002', 'PM002');
 
 -- --------------------------------------------------------
 
