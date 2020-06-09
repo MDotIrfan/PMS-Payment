@@ -3,7 +3,4 @@
   Buat Invoice
         </button>
 <hr>
-<p>
-<embed width="600" height="450" src="<?php echo base_url(); ?>files/contoh_po.pdf" type="application/pdf"></embed>
-</p>
 </div>

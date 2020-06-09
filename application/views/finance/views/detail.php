@@ -16,9 +16,18 @@
         </tr>
         <tr>
             <td><br>Bill To : <br>
-                   <?php 
+                   <?php
+                   $j = 0;
+                   $j_pm = count($pm); 
                     foreach($pm as $pm) {
-                        echo $pm['nama'].",";
+                        if($j==0){
+                            echo $pm['nama']; 
+                        } else if ($j==$j_pm -1) {
+                            echo " and ".$pm['nama'].".";
+                        } else {
+                            echo ", ".$pm['nama']; 
+                        }
+                        $j++;
                     }
                    ?><br></td>
             <td></td>
@@ -42,7 +51,7 @@
         </tr>
         <tr>
             <td></td>
-            <td style="font-style: italic"><?php echo $inv['id_invoice'];  $a = 1;
+            <td style="font-style: italic; text-align: center"><?php echo $inv['id_invoice'];  $a = 1;
                       $total = 0; ?></td>
             <td></td>
         </tr>

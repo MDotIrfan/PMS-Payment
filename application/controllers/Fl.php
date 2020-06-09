@@ -24,6 +24,7 @@ class Fl extends CI_Controller {
 		$data['pmp'] = $this->db->get_where('pekerjaan', ['id_fl' => $this->session->userdata('id_user'), 'status' =>'Menunggu PO'])->result_array();
 		$data['psi'] = $this->db->get_where('pekerjaan', ['id_fl' => $this->session->userdata('id_user'), 'status' =>'Siap Invoice'])->result_array();
 		$data['psudi'] = $this->db->get_where('pekerjaan', ['id_fl' => $this->session->userdata('id_user'), 'status' =>'Sudah Invoice'])->result_array();
+		$data['psp'] = $this->db->get_where('pekerjaan', ['id_fl' => $this->session->userdata('id_user'), 'status' =>'Selesai Pembayaran'])->result_array();
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('fl/'.$page,$data);
 		$this->load->view('template/tmplt_f');
@@ -141,7 +142,7 @@ class Fl extends CI_Controller {
         $this->email->to($data['pm']['email_pm']); // Ganti dengan email tujuan
 
         // Lampiran email, isi dengan url/path file
-        $this->email->attach(base_url('uploads/'.$data['p']['file_selesai'].'.pdf'));
+        $this->email->attach(base_url('uploads/'.$data['p']['file_selesai']));
 
         // Subject email
         $this->email->subject('Pekerjaan Selesai');
@@ -204,9 +205,9 @@ class Fl extends CI_Controller {
 	{	
 		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
-		$user = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
-		$data['pm'] = $this->db->get_where('pm',['id' =>  $user['id_pm']])->row_array();
+		//$user = $this->db->get_where('pekerjaan',['id_fl' => $this->session->userdata('id_user')])->row_array();
 		$user2 = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id])->row_array();
+		$data['pm'] = $this->db->get_where('pm',['id' =>  $user2['id_pm']])->row_array();
 		$data['po'] = $this->db->get_where('po',['id_pekerjaan' =>  $user2['id_pekerjaan']])->row_array();
 		$po = $this->db->get_where('po',['id_pekerjaan' =>  $user2['id_pekerjaan']])->row_array();
 		$data['i'] = $this->db->get_where('invoice',['id_po' =>  $po['id_po']])->row_array();
@@ -258,7 +259,7 @@ class Fl extends CI_Controller {
 		$data['i']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl AND pm.id = po.id_pm and f.id = '". $this->session->userdata('id_user')."' and i.id_invoice='".$id."'")->result_array();
 		$data['fl']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl and f.id = '". $this->session->userdata('id_user')."'GROUP BY f.id")->result_array();
 		foreach ($data['i'] as $p){
-			$data['pm']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND pm.id = po.id_pm and pm.id = '". $p['id_pm']."' GROUP BY pm.id")->result_array();
+			$data['pm']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND pm.id = po.id_pm GROUP BY pm.id")->result_array();
 		}
 		$data['inv']=$this->db->get_where('invoice', ['id_invoice'=>$id])->row_array();
 		$this->load->library('pdfgenerator');

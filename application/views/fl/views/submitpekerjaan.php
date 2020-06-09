@@ -77,7 +77,7 @@
                 </tbody>
             </table>
     Status          : <?php echo $pekerjaan['status'] ?> <br>
-    File Pekerjaan Awal : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_asal'] ?>.pdf">Download</a> <br>
+    File Pekerjaan Awal : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_asal'] ?>">Download</a> <br>
     <?php
         echo form_open_multipart('upload/do_upload');
         ?>

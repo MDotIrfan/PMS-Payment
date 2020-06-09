@@ -73,7 +73,7 @@ class Admin extends CI_Controller {
         $this->email->to($data['fl']['email_fl']); // Ganti dengan email tujuan
 
         // Lampiran email, isi dengan url/path file
-        $this->email->attach(base_url('uploads/'.$data['p']['file_asal'].'.pdf'));
+        $this->email->attach(base_url('uploads/'.$data['p']['file_asal']));
 
         // Subject email
         $this->email->subject('Pekerjaan Baru');
@@ -95,7 +95,7 @@ class Admin extends CI_Controller {
 
         // setting konfigurasi upload
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'pdf|docx';
+        $config['allowed_types'] = 'pdf|docx|zip|rar';
         $config['file_name'] = $id;
         // load library upload
         $this->load->library('upload', $config);
@@ -137,7 +137,7 @@ class Admin extends CI_Controller {
 				'id_fl' => $this->input->post('id_fl'),
 				'deadline' => $this->input->post('deadline'),
                 'status' => 'Sedang Dikerjakan',
-                'file_asal' => $id
+                'file_asal' => $result
             );
 
 			$this->db->insert('pekerjaan',$data);
@@ -150,7 +150,7 @@ class Admin extends CI_Controller {
 		$id = $this->input->post('id_pekerjaan');
 		// setting konfigurasi upload
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'pdf|docx';
+        $config['allowed_types'] = 'pdf|docx|zip|rar';
         $config['file_name'] = $id;
         // load library upload
         $this->load->library('upload', $config);
@@ -225,7 +225,7 @@ class Admin extends CI_Controller {
 				'id_fl' => $this->input->post('id_fl'),
 				'deadline' => $this->input->post('deadline'),
                 'status' => $this->input->post('status'),
-                'file_asal' => $id
+                'file_asal' => $result
             );
 
             $this->m_pms->updatePekerjaan($id,$data);

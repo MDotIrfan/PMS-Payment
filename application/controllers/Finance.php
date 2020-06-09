@@ -16,8 +16,10 @@ class Finance extends CI_Controller {
 		if(!file_exists(APPPATH."views/finance/".$page.'.php')){
 			show_404();
 		}
-		$data['user'] = $this->db->get_where('pm', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['psudi'] = $this->db->get_where('pekerjaan', ['status' =>'Sudah Invoice'])->result_array();
+		$data['psp'] = $this->db->get_where('pekerjaan', ['status' =>'Selesai Pembayaran'])->result_array();
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('finance/'.$page,$data);
 		$this->load->view('template/tmplt_f');
@@ -29,7 +31,7 @@ class Finance extends CI_Controller {
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['i']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl AND pm.id = po.id_pm and i.id_invoice='".$id."' GROUP BY i.id_invoice")->result_array();
 		foreach ($data['i'] as $p){
-			$data['pm']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND pm.id = po.id_pm and pm.id = '". $p['id_pm']."' GROUP BY pm.id")->result_array();
+			$data['pm']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND pm.id = po.id_pm GROUP BY pm.id")->result_array();
 			$data['fl']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl and f.id = '". $p['id_fl']."' GROUP BY f.id")->result_array();
 		}
 		$data['inv']=$this->db->get_where('invoice', ['id_invoice'=>$id])->row_array();

@@ -78,8 +78,8 @@
                 </tbody>
             </table>
     Status          : <?php echo $pekerjaan['status'] ?> <br>
-    File Pekerjaan Awal : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_asal'] ?>.pdf">Download</a> <br>
-    File Pekerjaan Selesai : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_selesai'] ?>.pdf">Download</a> <br>
+    File Pekerjaan Awal : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_asal'] ?>">Download</a> <br>
+    File Pekerjaan Selesai : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_selesai'] ?>">Download</a> <br>
 </p>
 <?php echo form_open(base_url().'pm/inputpo'); ?>
   <input type="hidden" name="id_po" value="PO-<?php echo $pekerjaan['id_pekerjaan'] ?>">

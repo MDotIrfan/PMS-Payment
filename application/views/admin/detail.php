@@ -78,9 +78,9 @@
                 </tbody>
             </table>
     Status          : <?php echo $pekerjaan['status'] ?> <br>
-    File Pekerjaan Awal : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_asal'] ?>.pdf">Download</a> <br>
-<?php if(!empty($pekerjaan['file_selesai'])){?> File Pekerjaan Selesai : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_selesai'] ?>.pdf">Download</a> <br> <?php } ?>
-<?php if(!empty($po['id_po'])){?> Purchase Order : <a href="<?php echo base_url(); ?>uploads/<?php echo $po['id_po'] ?>.pdf">Download</a> <br> <?php } ?>
-<?php if(!empty($i['id_invoice'])){?> Invoice : <a href="<?php echo base_url(); ?>uploads/<?php echo $i['id_invoice'] ?>.pdf">Download</a> <br> <?php } ?>
+    File Pekerjaan Awal : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_asal'] ?>">Download</a> <br>
+<?php if(!empty($pekerjaan['file_selesai'])){?> File Pekerjaan Selesai : <a href="<?php echo base_url(); ?>uploads/<?php echo $pekerjaan['file_selesai'] ?>">Download</a> <br> <?php } ?>
+<?php if(!empty($po['id_po'])){?> Purchase Order : <a href="<?php echo base_url(); ?>uploads/<?php echo $po['id_po'] ?>">Download</a> <br> <?php } ?>
+<?php if(!empty($i['id_invoice'])){?> Invoice : <a href="<?php echo base_url(); ?>uploads/<?php echo $i['id_invoice'] ?>">Download</a> <br> <?php } ?>
 </p>
 </div>

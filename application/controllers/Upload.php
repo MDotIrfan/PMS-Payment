@@ -17,7 +17,7 @@ class Upload extends CI_Controller {
 
         // setting konfigurasi upload
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'pdf|docx';
+        $config['allowed_types'] = 'pdf|docx|zip|rar';
         $config['file_name'] = 'SLS'.$id;
         // load library upload
         $this->load->library('upload', $config);
@@ -36,7 +36,7 @@ class Upload extends CI_Controller {
             $data = array(
                 'id_pekerjaan' =>  $id,
                 'status' => 'Menunggu PO',
-                'file_selesai' => 'SLS'.$id
+                'file_selesai' => $result
             );
 
             $this->m_pms->updateFile($id, $data);
@@ -73,7 +73,7 @@ class Upload extends CI_Controller {
         $this->email->to($data['pm']['email_pm']); // Ganti dengan email tujuan
 
         // Lampiran email, isi dengan url/path file
-        $this->email->attach(base_url('uploads/'.$data['p']['file_selesai'].'.pdf'));
+        $this->email->attach(base_url('uploads/'.$data['p']['file_selesai']));
 
         // Subject email
         $this->email->subject('Pekerjaan Baru');

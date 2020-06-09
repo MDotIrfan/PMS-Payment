@@ -8,7 +8,7 @@
 		<table>
 			<tr>
 				<td>ID</td>
-				<td><input type="text" name="id_pekerjaan" value="<?php echo $p['id_pekerjaan']?>"></td>
+				<td><input type="text" name="id_pekerjaan" value="<?php echo $p['id_pekerjaan']?>" disabled></td>
 			</tr>
 			<tr>
 				<td>Nama Pekerjaan</td>
