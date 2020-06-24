@@ -20,6 +20,15 @@ class Admin extends CI_Controller {
 		$this->load->view('template/tmplt_f');
 	}
 
+	public function pekerjaan($page = 'home')
+	{
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['pekerjaan'] = $this->m_pms->get_datamasterpekerjaan();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/pekerjaan',$data);
+		$this->load->view('template/tmplt_f');
+	}
+
 	public function tambahdata()
 	{
 		$x['nota']=$this->m_pms->get_idkerja();
@@ -142,9 +151,10 @@ class Admin extends CI_Controller {
 
 			$this->db->insert('pekerjaan',$data);
 			$this->kirimemail($id);
-            redirect('admin/');
+            redirect('admin/pekerjaan');
 		}
 	}
+	
 	function do_upload2() {
         $this->load->helper('url');
 		$id = $this->input->post('id_pekerjaan');
@@ -184,7 +194,7 @@ class Admin extends CI_Controller {
             );
 
             $this->m_pms->updatePekerjaan($id,$data);
-            redirect('admin/');
+            redirect('admin/pekerjaan');
         } else {
 			
         if (!$this->upload->do_upload('gambar')) {
@@ -229,15 +239,25 @@ class Admin extends CI_Controller {
             );
 
             $this->m_pms->updatePekerjaan($id,$data);
-            redirect('admin/');
+            redirect('admin/pekerjaan');
 		}
 		}
         
 	}
 	
 	function hapus($id){
+		$this->load->helper('text');
+		$p = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $id])->row_array();
+		$po = $this->db->get_where('po', ['id_pekerjaan' => $id])->row_array();
+		$inv = $this->db->get_where('invoice', ['id_po' => $po['id_po']])->row_array();
+		unlink(APPPATH.'../uploads/'.$inv['id_invoice'.'.pdf']);
+		unlink(APPPATH.'../uploads/PO-'.$id.'.pdf');
+		unlink(APPPATH.'../uploads/'.$p['file_asal']);
+		unlink(APPPATH.'../uploads/'.$p['file_selesai']);
+		$this->db->delete('invoice', array('id_po' => $po['id_po']));
+		$this->db->delete('po', array('id_pekerjaan' => $id));
 		$this->db->delete('pekerjaan', array('id_pekerjaan' => $id));
-		redirect('admin/');
+		redirect('admin/pekerjaan');
 	}
 
 	public function view($id = NULL)

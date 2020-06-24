@@ -30,10 +30,10 @@
           <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
               <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false" style="color:white"> 
-                  Welcome, <?php if($level['level']=='fl' || $level['level']=='pm') {echo $user['nama'];} else {echo $level['username'];}?> <b class="caret"></b>
+                  Welcome, <?php if($level['level']=='fl' || $level['level']=='pm' || $level['level']=='finance') {echo $user['nama'];} else {echo $level['username'];}?> <b class="caret"></b>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#"><i class="fa fa-user mx"></i>Profile</a>
+                <a class="dropdown-item" href="<?php if($level['level']=='fl'){echo base_url('/fl/profile');}else if($level['level']=='pm'){echo base_url('/pm/profile');} else if($level['level']=='finance'){echo base_url('/finance/profile');}?>"><i class="fa fa-user mx"></i>Profile</a>
                 <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i>Setting</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo site_url('welcome/logout') ?>"><i class="fa fa-sign-out"></i>Sign Out</a>
@@ -108,6 +108,44 @@
                     </a>
                     <a href="<?php echo base_url(); ?>pm/siapinvoice" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Siap Invoice</span>
+                    </a>
+                </div>
+                <?php } ?>
+                <?php if($level['level']=='admin'){ ?>
+                <a href="<?php echo base_url(); ?>admin" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-dashboard fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Dashboard</span>
+                    </div>
+                </a>
+                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-tasks fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Master Data</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <div id='submenu1' class="collapse sidebar-submenu">
+                    <a href="<?php echo base_url(); ?>admin/finance" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Finance</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>admin/freelance" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Freelance</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>admin/invoice" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Invoice</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>admin/pekerjaan" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Pekerjaan</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>admin/pm" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Project Manager</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>admin/po" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Purchase Order</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>admin/user" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">User</span>
                     </a>
                 </div>
                 <?php } ?>

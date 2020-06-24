@@ -152,6 +152,15 @@ class Pm extends CI_Controller {
 		// $this->load->view('pm/views/po',$data);
 	}
 
+	public function profile() {
+		$data['user'] = $this->db->get_where('pm', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['p'] = $this->db->query("select count(id_pekerjaan) as jumlah from pekerjaan where id_pm ='".$this->session->userdata('id_user')."'")->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('pm/views/profile',$data);
+		$this->load->view('template/tmplt_f');
+	}
+
 	public function kirimemail($id=NULL){
 		$data['po'] = $this->db->get_where('po', ['id_pekerjaan' => $id])->row_array();
 		$data['p'] = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $id])->row_array();

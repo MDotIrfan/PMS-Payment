@@ -16,7 +16,7 @@ class Finance extends CI_Controller {
 		if(!file_exists(APPPATH."views/finance/".$page.'.php')){
 			show_404();
 		}
-		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['user'] = $this->db->get_where('finance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['psudi'] = $this->db->get_where('pekerjaan', ['status' =>'Sudah Invoice'])->result_array();
 		$data['psp'] = $this->db->get_where('pekerjaan', ['status' =>'Selesai Pembayaran'])->result_array();
@@ -27,7 +27,7 @@ class Finance extends CI_Controller {
 
 	public function view($id = NULL)
 	{	
-		$data['user'] = $this->db->get_where('pm', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['user'] = $this->db->get_where('finance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['i']=$this->db->query("SELECT * FROM invoice i JOIN po JOIN freelance f JOIN pm JOIN pekerjaan p WHERE i.id_po = po.id_po AND p.id_pekerjaan = po.id_pekerjaan AND f.id = po.id_fl AND pm.id = po.id_pm and i.id_invoice='".$id."' GROUP BY i.id_invoice")->result_array();
 		foreach ($data['i'] as $p){
@@ -42,7 +42,7 @@ class Finance extends CI_Controller {
 
 	public function detail($id = NULL)
 	{	
-		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['user'] = $this->db->get_where('finance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$user = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id])->row_array();
 		$data['po'] = $this->db->get_where('po',['id_pekerjaan' =>  $user['id_pekerjaan']])->row_array();
@@ -96,6 +96,15 @@ class Finance extends CI_Controller {
 			$this->kirimemail($p['id_pekerjaan']);
 		}
 		redirect('finance/selesaipembayaran');
+	}
+
+	public function profile() {
+		$data['user'] = $this->db->get_where('finance', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['p'] = $this->db->query("select count(id_pekerjaan) as jumlah from pekerjaan where id_fl ='".$this->session->userdata('id_user')."'")->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('finance/views/profile',$data);
+		$this->load->view('template/tmplt_f');
 	}
 
 	public function create($id = NULL)
