@@ -45,7 +45,7 @@ class Fl extends CI_Controller {
 		$this->load->view('template/tmplt_f');
 	}
 
-	public function profile() {
+	public function profile($id=NULL) {
 		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['p'] = $this->db->query("select count(id_pekerjaan) as jumlah from pekerjaan where id_fl ='".$this->session->userdata('id_user')."'")->row_array();

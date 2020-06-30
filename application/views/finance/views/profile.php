@@ -3,7 +3,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" style="height: 200px; width: 200px;"alt=""/>
+                            <img src="<?php echo base_url()."/images/".$user['foto'];?>" style="height: 200px; width: 200px; object-fit: cover;"alt=""/>
                         </div>
                     </div>
                     <div class="col-md-6">

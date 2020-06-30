@@ -132,17 +132,11 @@
                     <a href="<?php echo base_url(); ?>admin/freelance" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Freelance</span>
                     </a>
-                    <a href="<?php echo base_url(); ?>admin/invoice" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Invoice</span>
-                    </a>
                     <a href="<?php echo base_url(); ?>admin/pekerjaan" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Pekerjaan</span>
                     </a>
                     <a href="<?php echo base_url(); ?>admin/pm" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Project Manager</span>
-                    </a>
-                    <a href="<?php echo base_url(); ?>admin/po" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Purchase Order</span>
                     </a>
                     <a href="<?php echo base_url(); ?>admin/user" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">User</span>

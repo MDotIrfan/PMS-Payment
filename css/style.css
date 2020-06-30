@@ -209,7 +209,7 @@ body {
     transform: scale(0.95);
   }
   
-  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date] {
+  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date], input[type=number] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -230,12 +230,12 @@ body {
     border-radius: 5px 5px 5px 5px;
   }
   
-  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date]:focus {
+  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date], input[type=number]:focus {
     background-color: #fff;
     border-bottom: 2px solid #ad003c;
   }
   
-  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date]:placeholder {
+  textarea, option, select, input[type=text], input[type=password], input[type=file], input[type=date], input[type=number]:placeholder {
     color: #cccccc;
   }
 
