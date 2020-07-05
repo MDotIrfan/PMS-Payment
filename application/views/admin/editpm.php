@@ -1,17 +1,17 @@
 <div class="col">
             
             <h1>
-                Edit Data Finance
+                Edit Data Project Manager
             </h1>
             <br>
-           <?php echo form_open_multipart('admin/do_uploadfinance2'); ?>
+           <?php echo form_open_multipart('admin/do_uploadpm2'); ?>
 		<table>
 			<tr>
 				<td></td>
 				<td><input type="hidden" name="id" value="<?php echo $p['id']?>"></td>
 			</tr>
 			<tr>
-				<td>Nama Finance</td>
+				<td>Nama Project Manager</td>
 				<td><input type="text" name="nama" value="<?php echo $p['nama']?>"></td>
 			</tr>
             <tr>
@@ -19,8 +19,8 @@
 				<td> <input type="file" name="gambar"></td>
             </tr>
             <tr>
-				<td>Email Finance</td>
-				<td><input type="text" name="email_finance" value="<?php echo $p['email_finance']?>"></td>
+				<td>Email Project Manager</td>
+				<td><input type="text" name="email_pm" value="<?php echo $p['email_pm']?>"></td>
             </tr>
             <tr>
 				<td>Alamat</td>
@@ -36,8 +36,12 @@
 </select></td>
             </tr>
             <tr>
-				<td>No. HP</td>
-				<td><input type="text" name="no_hp" value="<?php echo $p['no_hp']?>"></td>
+				<td>No. Telepon</td>
+				<td><input type="text" name="no_telp_pm" value="<?php echo $p['no_telp_pm']?>"></td>
+            </tr>
+            <tr>
+				<td>Fax Project Manager</td>
+				<td><input type="text" name="fax_pm" value="<?php echo $p['fax_pm']?>"></td>
             </tr>
             <tr>
 				<td>Username</td>

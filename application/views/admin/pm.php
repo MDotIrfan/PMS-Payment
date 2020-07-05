@@ -25,7 +25,7 @@
         <td><?php echo $p['nama']?></td>
         <td><?php echo $p['email_pm']?></td>
         <td><img src="<?php echo base_url()."/images/".$p['foto'];?>" style="height: 100px; width: 100px; object-fit: cover;"alt=""/></td>
-        <td><a href="<?php echo site_url('admin/ubahdata/'.$p['id'])?>"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
+        <td><a href="<?php echo site_url('admin/ubahdatapm/'.$p['id'])?>"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
         <i class="fa fa-edit"></i>
         </button></a><a href="<?php echo site_url('admin/hapuspm/'.$p['id'])?>"><button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">
         <i class="fa fa-trash"></i>

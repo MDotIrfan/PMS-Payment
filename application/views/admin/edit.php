@@ -7,8 +7,8 @@
            <?php echo form_open_multipart('admin/do_upload2'); ?>
 		<table>
 			<tr>
-				<td>ID</td>
-				<td><input type="text" name="id_pekerjaan" value="<?php echo $p['id_pekerjaan']?>" disabled></td>
+				<td></td>
+				<td><input type="hidden" name="id_pekerjaan" value="<?php echo $p['id_pekerjaan']?>"></td>
 			</tr>
 			<tr>
 				<td>Nama Pekerjaan</td>
