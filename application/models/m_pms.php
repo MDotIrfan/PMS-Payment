@@ -35,6 +35,20 @@ class m_pms extends CI_Model {
         return $this->db->get_where('pekerjaan', array('id_pekerjaan' => $id))->row_array();
     }
 
+    public function get_datapmsudahinvoice($id = FALSE){
+        if($id === FALSE){
+            return $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' => 'Sudah Invoice'])->result_array();
+        }
+        return $this->db->get_where('pekerjaan', array('id_pekerjaan' => $id))->row_array();
+    }
+
+    public function get_datapmselesaipembayaran($id = FALSE){
+        if($id === FALSE){
+            return $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' => 'Selesai Pembayaran'])->result_array();
+        }
+        return $this->db->get_where('pekerjaan', array('id_pekerjaan' => $id))->row_array();
+    }
+
 
     public function get_datafl($id = FALSE){
         if($id === FALSE){

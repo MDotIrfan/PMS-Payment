@@ -8,11 +8,10 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nama Pekerjaan</th>
-      <th scope="col">Total Kata</th>
-      <th scope="col">FL</th>
-      <th scope="col">Status</th>
+    <th scope="col">ID</th>
+      <th scope="col">Task Name</th>
+      <th scope="col">Fl</th>
+      <th scope="col">Pekerjaan Selesai</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -21,10 +20,10 @@
       <tr data-href="<?php echo site_url('pm/view/'.$p['id_pekerjaan'])?>">
       <th scope="row"><?php echo $p['id_pekerjaan']?></th>
         <td><?php echo $p['nama_pekerjaan']?></td>
-        <td><?php echo $p['wc_xtranslated'] + $p['wc_repetition'] + $p['wc_fuzzy100'] + $p['wc_fuzzy95'] + $p['wc_fuzzy85'] + $p['wc_fuzzy75'] + $p['wc_fuzzy50'] + $p['wc_nomatch']?></td>
         <?php $fl = $this->db->get_where('freelance',['id' =>  $p['id_fl']])->row_array();
         ?>
         <td><?php echo $fl['nama']?></td>
+        <td> <a href="<?php echo base_url(); ?>uploads/<?php echo $p['file_asal'] ?>"><?php echo $p['file_asal'] ?></a> <br></td>
         <td><?php echo $p['status']?></td>
         <td></td>
       </tr>

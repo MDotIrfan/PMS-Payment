@@ -3,8 +3,8 @@
 <hr>
 <p>
     Project Manager : <?php echo $pm['nama'] ?> <br>
-    Bahasa Awal     : <?php echo $pekerjaan['bahasa_asal'] ?> <br>
-    Bahasa Tujuan    : <?php echo $pekerjaan['bahasa_target'] ?> <br>
+    Bahasa Awal     : <?php echo $fl['bahasa_awal'] ?> <br>
+    Bahasa Tujuan    : <?php echo $fl['bahasa_akhir'] ?> <br>
     Currency   : <?php echo $pekerjaan['currency'] ?> <br>
     Detail Pekerjaan : <br>
     <table class="table table-bordered">

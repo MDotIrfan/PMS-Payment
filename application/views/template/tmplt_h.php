@@ -109,6 +109,12 @@
                     <a href="<?php echo base_url(); ?>pm/siapinvoice" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Siap Invoice</span>
                     </a>
+                    <a href="<?php echo base_url(); ?>pm/sudahinvoice" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Sudah di Invoice</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>pm/selesaipembayaran" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Selesai Pembayaran</span>
+                    </a>
                 </div>
                 <?php } ?>
                 <?php if($level['level']=='admin'){ ?>
@@ -150,7 +156,22 @@
                         <span class="menu-collapsed">Dashboard</span>
                     </div>
                 </a>
-                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Files</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <div id='submenu2' class="collapse sidebar-submenu">
+                    <a href="<?php echo base_url(); ?>finance/listpo" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">PO</span>
+                    </a>
+                    <a href="<?php echo base_url(); ?>finance/listinvoice" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Invoice</span>
+                    </a>
+                </div>
+                <!-- <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-tasks fa-fw mr-3"></span>
                         <span class="menu-collapsed">Task</span>
@@ -164,7 +185,7 @@
                     <a href="<?php echo base_url(); ?>finance/selesaipembayaran" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Selesai Pembayaran</span>
                     </a>
-                </div>
+                </div> -->
                 <?php } ?>          
             </ul>
         </div> 

@@ -23,8 +23,6 @@ class Pm extends CI_Controller {
 		$data['psd'] = $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' =>'Sedang Dikerjakan'])->result_array();
 		$data['pmp'] = $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' =>'Menunggu PO'])->result_array();
 		$data['psi'] = $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' =>'Siap Invoice'])->result_array();
-		$data['psudi'] = $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' =>'Sudah Invoice'])->result_array();
-		$data['psp'] = $this->db->get_where('pekerjaan', ['id_pm' => $this->session->userdata('id_user'), 'status' =>'Selesai Pembayaran'])->result_array();
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('pm/'.$page,$data);
 		$this->load->view('template/tmplt_f');
