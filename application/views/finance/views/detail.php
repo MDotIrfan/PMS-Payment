@@ -1,6 +1,6 @@
 <div class="col">
 <h1>Invoice : <?php foreach ($i as $i) : echo $i['id_invoice'];?></h1> <?php if($i['status']=="Sudah Invoice"){?><a href="<?php echo base_url('finance/konfirmasi/'.$i['id_invoice'])?>"><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-  Lakukan Pembayaran
+  Konfirmasi Pembayaran
 </button></a> <?php ;} ?>
         <?php   endforeach; ?>
 <hr>

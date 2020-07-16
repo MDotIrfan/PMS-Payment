@@ -148,27 +148,20 @@ class Pm extends CI_Controller {
 		$id_pekerjaan = $this->input->post('id_pekerjaan');
 		$data2 = array(
 			'wc_xtranslated' => $this->input->post('wc_xtranslated'),
-			'w_xtranslated' => $this->input->post('w_xtranslated'),
 			'wc_repetition' => $this->input->post('wc_repetition'),
-			'w_repetition' => $this->input->post('w_repetition'),
 			'wc_fuzzy100' => $this->input->post('wc_fuzzy100'),
-			'w_fuzzy100' => $this->input->post('w_fuzzy100'),
 			'wc_fuzzy95' => $this->input->post('wc_fuzzy95'),
-			'w_fuzzy95' => $this->input->post('w_fuzzy95'),
 			'wc_fuzzy85' => $this->input->post('wc_fuzzy85'),
-			'w_fuzzy85' => $this->input->post('w_fuzzy85'),
 			'wc_fuzzy50' => $this->input->post('wc_fuzzy50'),
-			'w_fuzzy50' => $this->input->post('w_fuzzy50'),
 			'wc_nomatch' => $this->input->post('wc_nomatch'),
-			'w_nomatch' => $this->input->post('w_nomatch'),
 		);
 		$this->m_pms->updatePekerjaan($id_pekerjaan,$data2);
 		$pekerjaan = $this->db->get_where('pekerjaan',['id_pekerjaan' => $id_pekerjaan])->row_array();
 		$id_fl = $this->input->post('id_fl');
 		$fl = $this->db->get_where('freelance',['id' => $id_fl])->row_array();
-		$total_bayar = (($pekerjaan['wc_xtranslated'] * $pekerjaan['w_xtranslated']/ 100) + ( $pekerjaan['wc_repetition'] * $pekerjaan['w_repetition']/ 100) + ($pekerjaan['wc_fuzzy100'] * $pekerjaan['w_fuzzy100']/ 100) 
-			+ ($pekerjaan['wc_fuzzy95'] * $pekerjaan['w_fuzzy95']/ 100) + ($pekerjaan['wc_fuzzy85'] * $pekerjaan['w_fuzzy85']/ 100) 
-			+ ($pekerjaan['wc_fuzzy75'] * $pekerjaan['w_fuzzy75']/ 100) + ($pekerjaan['wc_fuzzy50'] * $pekerjaan['w_fuzzy50']/ 100) + ($pekerjaan['wc_nomatch'] * $pekerjaan['w_nomatch']/ 100))*$fl['rate'];
+		$total_bayar = (($pekerjaan['wc_xtranslated'] * 0/ 100) + ( $pekerjaan['wc_repetition'] * 0/ 100) + ($pekerjaan['wc_fuzzy100'] * 0/ 100) 
+			+ ($pekerjaan['wc_fuzzy95'] * 30/ 100) + ($pekerjaan['wc_fuzzy85'] * 50/ 100) 
+			+ ($pekerjaan['wc_fuzzy75'] * 70/ 100) + ($pekerjaan['wc_fuzzy50'] * 100/ 100) + ($pekerjaan['wc_nomatch'] * 100/ 100))*$fl['rate'];
 		$id_fl = $this->input->post('id_fl');
 		$id_pm = $this->input->post('id_pm');
 

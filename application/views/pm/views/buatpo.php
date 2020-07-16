@@ -18,64 +18,32 @@
 				<td><input type="text" name="wc_xtranslated" value="0"></td>
             </tr>
             <tr>
-				<td>Weight xtranslated</td>
-				<td><input type="text" name="w_xtranslated" value="0">%</td>
-            </tr>
-            <tr>
 				<td>Word Count repetition</td>
 				<td><input type="text" name="wc_repetition" value="0"></td>
-            </tr>
-            <tr>
-				<td>Weight repetition</td>
-				<td><input type="text" name="w_repetition" value="0">%</td>
             </tr>
             <tr>
 				<td>Word Count fuzzy 100%</td>
 				<td><input type="text" name="wc_fuzzy100" value="0"></td>
             </tr>
             <tr>
-				<td>Weight fuzzy 100%</td>
-				<td><input type="text" name="w_fuzzy100" value="0">%</td>
-            </tr>
-            <tr>
 				<td>Word Count 95 - 99%</td>
 				<td><input type="text" name="wc_fuzzy95" value="0"></td>
-            </tr>
-            <tr>
-				<td>weight 95 - 99%</td>
-				<td><input type="text" name="w_fuzzy95" value="0">%</td>
             </tr>
             <tr>
 				<td>Word Count 85 - 94%</td>
 				<td><input type="text" name="wc_fuzzy85" value="0"></td>
             </tr>
             <tr>
-				<td>weight 85 - 94%</td>
-				<td><input type="text" name="w_fuzzy85" value="0">%</td>
-            </tr>
-            <tr>
 				<td>Word Count 75 - 84%</td>
 				<td><input type="text" name="wc_fuzzy75" value="0"></td>
-            </tr>
-            <tr>
-				<td>weight 75 - 84%</td>
-				<td><input type="text" name="w_fuzzy75" value="0">%</td>
             </tr>
             <tr>
 				<td>Word Count 50 - 74%</td>
 				<td><input type="text" name="wc_fuzzy50" value="0"></td>
             </tr>
             <tr>
-				<td>weight 50 - 74%</td>
-				<td><input type="text" name="w_fuzzy50" value="0">%</td>
-            </tr>
-            <tr>
 				<td>Word Count No Match</td>
 				<td><input type="text" name="wc_nomatch" value="0"></td>
-            </tr>
-            <tr>
-				<td>weight No Match</td>
-				<td><input type="text" name="w_nomatch" value="0">%</td>
             </tr>
 		</table>
   <input type="hidden" name="id_po" value="PO-<?php echo $pekerjaan['id_pekerjaan'] ?>">

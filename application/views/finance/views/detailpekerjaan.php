@@ -18,57 +18,57 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                <tr>
                         <th>XTranslated</th>
                         <td><?php echo $pekerjaan['wc_xtranslated'] ?></td>
-                        <td><?php echo $pekerjaan['w_xtranslated'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_xtranslated'] * $pekerjaan['w_xtranslated'] / 100?></td>
+                        <td><?php echo '0%'?></td>
+                        <td><?php echo $pekerjaan['wc_xtranslated'] * 0 / 100?></td>
                     </tr>
                     <tr>
                         <th>Repetition</th>
                         <td><?php echo $pekerjaan['wc_repetition'] ?></td>
-                        <td><?php echo $pekerjaan['w_repetition'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_repetition'] * $pekerjaan['w_repetition'] / 100?></td>
+                        <td><?php echo '0%'?></td>
+                        <td><?php echo $pekerjaan['wc_repetition'] * 0 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 100%</th>
                         <td><?php echo $pekerjaan['wc_fuzzy100'] ?></td>
-                        <td><?php echo $pekerjaan['w_fuzzy100'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_fuzzy100'] * $pekerjaan['w_fuzzy100'] / 100?></td>
+                        <td><?php echo '0%'?></td>
+                        <td><?php echo $pekerjaan['wc_fuzzy100'] * 0 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 95 - 99%</th>
                         <td><?php echo $pekerjaan['wc_fuzzy95'] ?></td>
-                        <td><?php echo $pekerjaan['w_fuzzy95'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_fuzzy95'] * $pekerjaan['w_fuzzy95'] / 100?></td>
+                        <td><?php echo '30%'?></td>
+                        <td><?php echo $pekerjaan['wc_fuzzy95'] * 30 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 85 - 94%</th>
                         <td><?php echo $pekerjaan['wc_fuzzy85'] ?></td>
-                        <td><?php echo $pekerjaan['w_fuzzy85'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_fuzzy85'] * $pekerjaan['w_fuzzy85'] / 100?></td>
+                        <td><?php echo '50%'?></td>
+                        <td><?php echo $pekerjaan['wc_fuzzy85'] * 50 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 75 - 84%</th>
                         <td><?php echo $pekerjaan['wc_fuzzy75'] ?></td>
-                        <td><?php echo $pekerjaan['w_fuzzy75'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_fuzzy75'] * $pekerjaan['w_fuzzy75'] / 100?></td>
+                        <td><?php echo '70%'?></td>
+                        <td><?php echo $pekerjaan['wc_fuzzy75'] * 70 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 50 - 74%</th>
                         <td><?php echo $pekerjaan['wc_fuzzy50'] ?></td>
-                        <td><?php echo $pekerjaan['w_fuzzy50'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_fuzzy50'] * $pekerjaan['w_fuzzy50'] / 100?></td>
+                        <td><?php echo '100%'?></td>
+                        <td><?php echo $pekerjaan['wc_fuzzy50'] * 100 / 100?></td>
                     </tr>
                     <tr>
                         <th>No Match</th>
                         <td><?php echo $pekerjaan['wc_nomatch'] ?></td>
-                        <td><?php echo $pekerjaan['w_nomatch'], '%'?></td>
-                        <td><?php echo $pekerjaan['wc_nomatch'] * $pekerjaan['w_nomatch'] / 100?></td>
+                        <td><?php echo '100%'?></td>
+                        <td><?php echo $pekerjaan['wc_nomatch'] * 100 / 100?></td>
                     </tr>
-                    <?php $totalw = ($pekerjaan['wc_xtranslated'] * $pekerjaan['w_xtranslated']/ 100) + ( $pekerjaan['wc_repetition'] * $pekerjaan['w_repetition']/ 100) + ($pekerjaan['wc_fuzzy100'] * $pekerjaan['w_fuzzy100']/ 100) 
-                        + ($pekerjaan['wc_fuzzy95'] * $pekerjaan['w_fuzzy95']/ 100) + ($pekerjaan['wc_fuzzy85'] * $pekerjaan['w_fuzzy85']/ 100) 
-                        + ($pekerjaan['wc_fuzzy75'] * $pekerjaan['w_fuzzy75']/ 100) + ($pekerjaan['wc_fuzzy50'] * $pekerjaan['w_fuzzy50']/ 100) + ($pekerjaan['wc_nomatch'] * $pekerjaan['w_nomatch']/ 100)?>
+                    <?php $totalw = ($pekerjaan['wc_xtranslated'] * 0/ 100) + ( $pekerjaan['wc_repetition'] * 0/ 100) + ($pekerjaan['wc_fuzzy100'] * 0/ 100) 
+                        + ($pekerjaan['wc_fuzzy95'] * 30/ 100) + ($pekerjaan['wc_fuzzy85'] * 50/ 100) 
+                        + ($pekerjaan['wc_fuzzy75'] * 70/ 100) + ($pekerjaan['wc_fuzzy50'] * 100/ 100) + ($pekerjaan['wc_nomatch'] * 100/ 100)?>
                     <tr>
                         <th>Total</th>
                         <td><?php echo $pekerjaan['wc_xtranslated'] + $pekerjaan['wc_repetition'] + $pekerjaan['wc_fuzzy100'] + $pekerjaan['wc_fuzzy95'] + $pekerjaan['wc_fuzzy85'] + $pekerjaan['wc_fuzzy75'] + $pekerjaan['wc_fuzzy50'] + $pekerjaan['wc_nomatch']?></td>

@@ -118,55 +118,55 @@
                 <tr>
                         <th>XTranslated</th>
                         <td><?php echo $p['wc_xtranslated'] ?></td>
-                        <td><?php echo $p['w_xtranslated'], '%'?></td>
-                        <td><?php echo $p['wc_xtranslated'] * $p['w_xtranslated'] / 100?></td>
+                        <td><?php echo '0%'?></td>
+                        <td><?php echo $p['wc_xtranslated'] * 0 / 100?></td>
                     </tr>
                     <tr>
                         <th>Repetition</th>
                         <td><?php echo $p['wc_repetition'] ?></td>
-                        <td><?php echo $p['w_repetition'], '%'?></td>
-                        <td><?php echo $p['wc_repetition'] * $p['w_repetition'] / 100?></td>
+                        <td><?php echo '0%'?></td>
+                        <td><?php echo $p['wc_repetition'] * 0 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 100%</th>
                         <td><?php echo $p['wc_fuzzy100'] ?></td>
-                        <td><?php echo $p['w_fuzzy100'], '%'?></td>
-                        <td><?php echo $p['wc_fuzzy100'] * $p['w_fuzzy100'] / 100?></td>
+                        <td><?php echo '0%'?></td>
+                        <td><?php echo $p['wc_fuzzy100'] * 0 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 95 - 99%</th>
                         <td><?php echo $p['wc_fuzzy95'] ?></td>
-                        <td><?php echo $p['w_fuzzy95'], '%'?></td>
-                        <td><?php echo $p['wc_fuzzy95'] * $p['w_fuzzy95'] / 100?></td>
+                        <td><?php echo '30%'?></td>
+                        <td><?php echo $p['wc_fuzzy95'] * 30 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 85 - 94%</th>
                         <td><?php echo $p['wc_fuzzy85'] ?></td>
-                        <td><?php echo $p['w_fuzzy85'], '%'?></td>
-                        <td><?php echo $p['wc_fuzzy85'] * $p['w_fuzzy85'] / 100?></td>
+                        <td><?php echo '50%'?></td>
+                        <td><?php echo $p['wc_fuzzy85'] * 70 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 75 - 84%</th>
                         <td><?php echo $p['wc_fuzzy75'] ?></td>
-                        <td><?php echo $p['w_fuzzy75'], '%'?></td>
-                        <td><?php echo $p['wc_fuzzy75'] * $p['w_fuzzy75'] / 100?></td>
+                        <td><?php echo '70%'?></td>
+                        <td><?php echo $p['wc_fuzzy75'] * 70 / 100?></td>
                     </tr>
                     <tr>
                         <th>Fuzzy 50 - 74%</th>
                         <td><?php echo $p['wc_fuzzy50'] ?></td>
-                        <td><?php echo $p['w_fuzzy50'], '%'?></td>
-                        <td><?php echo $p['wc_fuzzy50'] * $p['w_fuzzy50'] / 100?></td>
+                        <td><?php echo '100%'?></td>
+                        <td><?php echo $p['wc_fuzzy50'] * 100 / 100?></td>
                     </tr>
                     <tr>
                         <th>No Match</th>
                         <td><?php echo $p['wc_nomatch'] ?></td>
-                        <td><?php echo $p['w_nomatch'], '%'?></td>
-                        <td><?php echo $p['wc_nomatch'] * $p['w_nomatch'] / 100?></td>
+                        <td><?php echo '100%'?></td>
+                        <td><?php echo $p['wc_nomatch'] * 100 / 100?></td>
                     </tr>
                     <?php $totalw = 0;  
-                    $totalw = ($p['wc_xtranslated'] * $p['w_xtranslated']/ 100) + ( $p['wc_repetition'] * $p['w_repetition']/ 100) + ($p['wc_fuzzy100'] * $p['w_fuzzy100']/ 100) 
-                        + ($p['wc_fuzzy95'] * $p['w_fuzzy95']/ 100) + ($p['wc_fuzzy85'] * $p['w_fuzzy85']/ 100) 
-                        + ($p['wc_fuzzy75'] * $p['w_fuzzy75']/ 100) + ($p['wc_fuzzy50'] * $p['w_fuzzy50']/ 100) + ($p['wc_nomatch'] * $p['w_nomatch']/ 100);?>
+                    $totalw = ($p['wc_xtranslated'] * 0/ 100) + ( $p['wc_repetition'] * 0/ 100) + ($p['wc_fuzzy100'] * 0/ 100) 
+                        + ($p['wc_fuzzy95'] * 30/ 100) + ($p['wc_fuzzy85'] * 50/ 100) 
+                        + ($p['wc_fuzzy75'] * 70/ 100) + ($p['wc_fuzzy50'] * 100/ 100) + ($p['wc_nomatch'] * 100/ 100);?>
                     <tr>
                         <th>Total</th>
                         <td><?php echo $p['wc_xtranslated'] + $p['wc_repetition'] + $p['wc_fuzzy100'] + $p['wc_fuzzy95'] + $p['wc_fuzzy85'] + $p['wc_fuzzy75'] + $p['wc_fuzzy50'] + $p['wc_nomatch']?></td>
