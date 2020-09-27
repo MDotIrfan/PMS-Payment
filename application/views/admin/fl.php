@@ -4,6 +4,8 @@
             <h1>
                 List Freelance
             </h1>
+            <?= $this->session->flashdata('message');
+            ?>
             <br>
             <a href="<?php echo site_url('admin/tambahdatafl/')?>"><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
   Tambah Data

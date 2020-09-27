@@ -9,6 +9,8 @@ class Admin extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('m_pms');
 		$this->load->helper('url_helper');	
+		$this->load->library('form_validation');
+		$this->load->library('session');
 	}
 
 	public function home($page = 'home')
@@ -107,15 +109,15 @@ class Admin extends CI_Controller {
 
 	public function tambahdatafinance()
 	{
-		$x['nota']=$this->m_pms->get_idfinance();
-		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
-		$data['pm'] = $this->db->get('pm')->result_array();
-		$data['fl'] = $this->db->get('freelance')->result_array();
-		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
-		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
-		$this->load->view('template/tmplt_h',$data);
-		$this->load->view('admin/tambahfinance',$x);
-		$this->load->view('template/tmplt_f');
+			$x['nota']=$this->m_pms->get_idfinance();
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+			$data['pm'] = $this->db->get('pm')->result_array();
+			$data['fl'] = $this->db->get('freelance')->result_array();
+			$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
+			$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+			$this->load->view('template/tmplt_h',$data);
+			$this->load->view('admin/tambahfinance',$x);
+			$this->load->view('template/tmplt_f');
 	}
 
 	public function tambahdatafl()
@@ -240,6 +242,19 @@ class Admin extends CI_Controller {
 	}
 
 	function do_upload() {
+		$this->form_validation->set_rules('nama_pekerjaan', 'project_name', 'required', array('required' => 'Nama Pekerjaan tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$x['nota']=$this->m_pms->get_idkerja();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['pm'] = $this->db->get('pm')->result_array();
+		$data['fl'] = $this->db->get('freelance')->result_array();
+		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
+		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/tambah',$x);
+		$this->load->view('template/tmplt_f');
+		} else {
         $this->load->helper('url');
         $id = $this->input->post('id_pekerjaan');
 
@@ -276,12 +291,34 @@ class Admin extends CI_Controller {
 
 			$this->db->insert('pekerjaan',$data);
 			$this->kirimemail($id);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data pekerjaan berhasil ditambahkan!
+		  </div>');
             redirect('admin/pekerjaan');
 		}
 	}
+	}
 
 	function do_uploadfinance() {
-        $this->load->helper('url');
+		$this->form_validation->set_rules('nama', 'name', 'required', array('required' => 'Nama tidak boleh kosong'));
+		$this->form_validation->set_rules('email_finance', 'Email', 'required|valid_email|is_unique[finance.email_finance]', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid', 'is_unique' => 'email sudah digunakan'));
+		$this->form_validation->set_rules('alamat', 'Address', 'required', array('required' => 'Alamat tidak boleh kosong'));
+		$this->form_validation->set_rules('no_hp', 'phone_number', 'required|is_natural', array('required' => 'No. Handphone tidak boleh kosong' , 'is_natural'=> 'Format No. Handphone tidak valid'));
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]', array('required' => 'Username tidak boleh kosong', 'is_unique' => 'username sudah digunakan'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$x['nota']=$this->m_pms->get_idfinance();
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+			$data['pm'] = $this->db->get('pm')->result_array();
+			$data['fl'] = $this->db->get('freelance')->result_array();
+			$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
+			$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+			$this->load->view('template/tmplt_h',$data);
+			$this->load->view('admin/tambahfinance',$x);
+			$this->load->view('template/tmplt_f');
+		} else {
+			$this->load->helper('url');
         $id = $this->input->post('id');
 
         // setting konfigurasi upload
@@ -316,17 +353,45 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_finance'),
 				'id_user' => $id,
 				'level' => 'finance'
             );
 
 			$this->db->insert('finance',$data);
 			$this->db->insert('user',$data2);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data finance berhasil ditambahkan!
+		  </div>');
             redirect('admin/finance');
+		}	
 		}
 	}
 
 	function do_uploadfl() {
+		$this->form_validation->set_rules('nama', 'name', 'required', array('required' => 'Nama tidak boleh kosong'));
+		$this->form_validation->set_rules('email_fl', 'Email', 'required|valid_email|is_unique[freelance.email_fl]', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid', 'is_unique' => 'email sudah digunakan'));
+		$this->form_validation->set_rules('alamat', 'Address', 'required', array('required' => 'Alamat tidak boleh kosong'));
+		$this->form_validation->set_rules('no_telp_fl', 'tel_number', 'is_natural', array('is_natural'=> 'Format No.telfon tidak valid'));
+		$this->form_validation->set_rules('no_hp_fl', 'phone_number', 'required|is_natural', array('required' => 'No. Handphone tidak boleh kosong' , 'is_natural'=> 'Format No. Handphone tidak valid'));
+		$this->form_validation->set_rules('bank', 'Bank', 'required', array('required' => 'Nama Bank tidak boleh kosong'));
+		$this->form_validation->set_rules('no_akun', 'number_account', 'required|is_natural', array('required' => 'No. Rekening tidak boleh kosong' , 'is_natural'=> 'Format No. Rekening tidak valid'));
+		$this->form_validation->set_rules('bahasa_awal', 'F_language', 'required', array('required' => 'Bahasa Awal tidak boleh kosong'));
+		$this->form_validation->set_rules('bahasa_akhir', 'T_language', 'required', array('required' => 'Bahasa Akhir tidak boleh kosong'));
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]', array('required' => 'Username tidak boleh kosong', 'is_unique' => 'username sudah digunakan'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$x['nota']=$this->m_pms->get_idfl();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['pm'] = $this->db->get('pm')->result_array();
+		$data['fl'] = $this->db->get('freelance')->result_array();
+		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
+		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/tambahfl',$x);
+		$this->load->view('template/tmplt_f');
+		} else {
         $this->load->helper('url');
         $id = $this->input->post('id');
 
@@ -368,17 +433,40 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_fl'),
 				'id_user' => $id,
 				'level' => 'fl'
             );
 
 			$this->db->insert('freelance',$data);
 			$this->db->insert('user',$data2);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data freelance berhasil ditambahkan!
+		  </div>');
             redirect('admin/freelance');
 		}
 	}
+	}
 
 	function do_uploadpm() {
+		$this->form_validation->set_rules('nama', 'name', 'required', array('required' => 'Nama tidak boleh kosong'));
+		$this->form_validation->set_rules('email_pm', 'Email', 'required|valid_email|is_unique[pm.email_pm]', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid', 'is_unique' => 'email sudah digunakan'));
+		$this->form_validation->set_rules('alamat', 'Address', 'required', array('required' => 'Alamat tidak boleh kosong'));
+		$this->form_validation->set_rules('no_telp_pm', 'phone_number', 'required|is_natural', array('required' => 'No. Telfon tidak boleh kosong' , 'is_natural'=> 'Format No. Telfon tidak valid'));
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]', array('required' => 'Username tidak boleh kosong', 'is_unique' => 'username sudah digunakan'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$x['nota']=$this->m_pms->get_idpm();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['pm'] = $this->db->get('pm')->result_array();
+		$data['fl'] = $this->db->get('freelance')->result_array();
+		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
+		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/tambahpm',$x);
+		$this->load->view('template/tmplt_f');
+		} else {
         $this->load->helper('url');
         $id = $this->input->post('id');
 
@@ -415,17 +503,35 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_pm'),
 				'id_user' => $id,
 				'level' => 'pm'
             );
 
 			$this->db->insert('pm',$data);
 			$this->db->insert('user',$data2);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data project manager berhasil ditambahkan!
+		  </div>');
             redirect('admin/pm');
 		}
 	}
+	}
 	
-	function do_upload2() {
+	function do_upload2($id=NULL) {
+		$this->form_validation->set_rules('nama_pekerjaan', 'project_name', 'required', array('required' => 'Nama Pekerjaan tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['pm'] = $this->db->get('pm')->result_array();
+		$data['fl'] = $this->db->get('freelance')->result_array();
+		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
+		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+		$data['p'] = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $id])->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/edit',$data);
+		$this->load->view('template/tmplt_f');
+		} else {
         $this->load->helper('url');
 		$id = $this->input->post('id_pekerjaan');
 		// setting konfigurasi upload
@@ -446,7 +552,10 @@ class Admin extends CI_Controller {
                 'status' => $this->input->post('status')
             );
 
-            $this->m_pms->updatePekerjaan($id,$data);
+			$this->m_pms->updatePekerjaan($id,$data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data pekerjaan berhasil diubah!
+		  </div>');
             redirect('admin/pekerjaan');
         } else {
 			
@@ -474,26 +583,78 @@ class Admin extends CI_Controller {
                 'file_asal' => $result
             );
 
-            $this->m_pms->updatePekerjaan($id,$data);
+			$this->m_pms->updatePekerjaan($id,$data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data pekerjaan berhasil diubah!
+		  </div>');
             redirect('admin/pekerjaan');
 		}
 		}
-        
+	}
 	}
 
-	function do_edituser(){
+	function do_edituser($id=NULL){
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid'));
+		$this->form_validation->set_rules('username', 'Username', 'required', array('required' => 'Username tidak boleh kosong'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/edituser',$data);
+		$this->load->view('template/tmplt_f');
+		} else {
 		$id = $this->input->post('id_user');
+		$level = $this->input->post('level');
         $data2 = array(
 			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
+			'email' => $this->input->post('email'),
 			'level' => $this->input->post('level')
 		);
+		if($level == 'fl'){
+			$data = array(
+				'email_fl' => $this->input->post('email'),
+			);
+			$this->db->update('freelance', $data, array('id' => $id));
+		} elseif($level == 'pm'){
+			$data = array(
+				'email_pm' => $this->input->post('email'),
+			);
+			$this->db->update('pm', $data, array('id' => $id));
+		} elseif($level == 'finance'){
+			$data = array(
+				'email_finance' => $this->input->post('email'),
+			);
+			$this->db->update('finance', $data, array('id' => $id));
+		}
 		$this->db->update('user', $data2, array('id_user' => $id));
-        redirect('admin/user');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data user berhasil diubah!
+		  </div>');
+		redirect('admin/user');
+	}
 	}
 
-	function do_uploadfinance2() {
-        $this->load->helper('url');
+	function do_uploadfinance2($id=NULL) {
+		$this->form_validation->set_rules('nama', 'name', 'required', array('required' => 'Nama tidak boleh kosong'));
+		$this->form_validation->set_rules('email_finance', 'Email', 'required|valid_email', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid'));
+		$this->form_validation->set_rules('alamat', 'Address', 'required', array('required' => 'Alamat tidak boleh kosong'));
+		$this->form_validation->set_rules('no_hp', 'phone_number', 'required|is_natural', array('required' => 'No. Handphone tidak boleh kosong' , 'is_natural'=> 'Format No. Handphone tidak valid'));
+		$this->form_validation->set_rules('username', 'Username', 'required', array('required' => 'Username tidak boleh kosong'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['p'] = $this->db->get_where('finance', ['id' => $id])->row_array();
+		$data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/editfinance',$data);
+		$this->load->view('template/tmplt_f');
+		} else {
+		
+		$this->load->helper('url');
 		$id = $this->input->post('id');
 		// setting konfigurasi upload
         $config['upload_path'] = './images/';
@@ -515,12 +676,16 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_finance'),
 				//'id_user' => $id,
 				'level' => 'finance'
 			);
 			
 			$this->db->update('finance', $data, array('id' => $id));
 			$this->db->update('user', $data2, array('id_user' => $id));
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data finance berhasil diubah!
+		  </div>');
             redirect('admin/finance');
         } else {
 			
@@ -550,20 +715,45 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_finance'),
 				//'id_user' => $id,
 				'level' => 'finance'
             );
 
 			$this->db->update('finance', $data, array('id' => $id));
 			$this->db->update('user', $data2, array('id_user' => $id));
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data finance berhasil diubah!
+		  </div>');
             redirect('admin/finance');
 		}
 		}
+	}
         
 	}
 	
-	function do_uploadfl2() {
-        $this->load->helper('url');
+	function do_uploadfl2($id=NULL) {
+		$this->form_validation->set_rules('nama', 'name', 'required', array('required' => 'Nama tidak boleh kosong'));
+		$this->form_validation->set_rules('email_fl', 'Email', 'required|valid_email', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid'));
+		$this->form_validation->set_rules('alamat', 'Address', 'required', array('required' => 'Alamat tidak boleh kosong'));
+		$this->form_validation->set_rules('no_telp_fl', 'tel_number', 'is_natural', array('is_natural'=> 'Format No.telfon tidak valid'));
+		$this->form_validation->set_rules('no_hp_fl', 'phone_number', 'required|is_natural', array('required' => 'No. Handphone tidak boleh kosong' , 'is_natural'=> 'Format No. Handphone tidak valid'));
+		$this->form_validation->set_rules('bank', 'Bank', 'required', array('required' => 'Nama Bank tidak boleh kosong'));
+		$this->form_validation->set_rules('no_akun', 'number_account', 'required|is_natural', array('required' => 'No. Rekening tidak boleh kosong' , 'is_natural'=> 'Format No. Rekening tidak valid'));
+		$this->form_validation->set_rules('bahasa_awal', 'F_language', 'required', array('required' => 'Bahasa Awal tidak boleh kosong'));
+		$this->form_validation->set_rules('bahasa_akhir', 'T_language', 'required', array('required' => 'Bahasa Akhir tidak boleh kosong'));
+		$this->form_validation->set_rules('username', 'Username', 'required', array('required' => 'Username tidak boleh kosong'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['p'] = $this->db->get_where('freelance', ['id' => $id])->row_array();
+		$data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/editfl',$data);
+		$this->load->view('template/tmplt_f');
+		} else {
+		$this->load->helper('url');
 		$id = $this->input->post('id');
 		// setting konfigurasi upload
         $config['upload_path'] = './images/';
@@ -591,12 +781,16 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_fl'),
 				//'id_user' => $id,
 				'level' => 'fl'
             );
 			
 			$this->db->update('freelance', $data, array('id' => $id));
 			$this->db->update('user', $data2, array('id_user' => $id));
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data freelance berhasil diubah!
+		  </div>');
             redirect('admin/freelance');
         } else {
 			
@@ -632,19 +826,38 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_fl'),
 				'id_user' => $id,
 				'level' => 'fl'
             );
 
 			$this->db->update('freelance', $data, array('id' => $id));
 			$this->db->update('user', $data2, array('id_user' => $id));
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data freelance berhasil diubah!
+		  </div>');
             redirect('admin/freelance');
 		}
 		}
-        
+	}
 	}
 
-	function do_uploadpm2() {
+	function do_uploadpm2($id=NULL) {
+		$this->form_validation->set_rules('nama', 'name', 'required', array('required' => 'Nama tidak boleh kosong'));
+		$this->form_validation->set_rules('email_pm', 'Email', 'required|valid_email', array('required' => 'Email tidak boleh kosong', 'valid_email' => 'Format Email tidak valid'));
+		$this->form_validation->set_rules('alamat', 'Address', 'required', array('required' => 'Alamat tidak boleh kosong'));
+		$this->form_validation->set_rules('no_telp_pm', 'phone_number', 'required|is_natural', array('required' => 'No. Telfon tidak boleh kosong' , 'is_natural'=> 'Format No. Telfon tidak valid'));
+		$this->form_validation->set_rules('username', 'Username', 'required', array('required' => 'Username tidak boleh kosong'));
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong'));
+
+		if($this->form_validation->run() == false) {
+			$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['p'] = $this->db->get_where('pm', ['id' => $id])->row_array();
+		$data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/editpm',$data);
+		$this->load->view('template/tmplt_f');
+		} else {
         $this->load->helper('url');
 		$id = $this->input->post('id');
 		// setting konfigurasi upload
@@ -669,12 +882,16 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_pm'),
 				//'id_user' => $id,
 				'level' => 'pm'
             );
 			
 			$this->db->update('pm', $data, array('id' => $id));
 			$this->db->update('user', $data2, array('id_user' => $id));
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data project manager berhasil diubah!
+		  </div>');
             redirect('admin/pm');
         } else {
 			
@@ -705,16 +922,20 @@ class Admin extends CI_Controller {
 			$data2 = array(
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email_pm'),
 				//'id_user' => $id,
 				'level' => 'pm'
             );
 
 			$this->db->update('pm', $data, array('id' => $id));
 			$this->db->update('user', $data2, array('id_user' => $id));
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data project manager berhasil diubah!
+		  </div>');
             redirect('admin/pm');
 		}
 		}
-        
+	}
 	}
 
 	function hapus($id){
@@ -729,6 +950,9 @@ class Admin extends CI_Controller {
 		$this->db->delete('invoice', array('id_po' => $po['id_po']));
 		$this->db->delete('po', array('id_pekerjaan' => $id));
 		$this->db->delete('pekerjaan', array('id_pekerjaan' => $id));
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data pekerjaan berhasil dihapus!
+		  </div>');
 		redirect('admin/pekerjaan');
 	}
 
@@ -738,6 +962,9 @@ class Admin extends CI_Controller {
 		unlink(APPPATH.'../images/'.$po['foto']);
 		$this->db->delete('user', array('id_user' => $id));
 		$this->db->delete('finance', array('id' => $id));
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data finance berhasil dihapus!
+		  </div>');
 		redirect('admin/finance');
 	}
 
@@ -747,6 +974,9 @@ class Admin extends CI_Controller {
 		unlink(APPPATH.'../images/'.$po['foto']);
 		$this->db->delete('user', array('id_user' => $id));
 		$this->db->delete('freelance', array('id' => $id));
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data freelance berhasil dihapus!
+		  </div>');
 		redirect('admin/freelance');
 	}
 
@@ -756,6 +986,9 @@ class Admin extends CI_Controller {
 		unlink(APPPATH.'../images/'.$po['foto']);
 		$this->db->delete('user', array('id_user' => $id));
 		$this->db->delete('pm', array('id' => $id));
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data project manager berhasil dihapus!
+		  </div>');
 		redirect('admin/pm');
 	}
 
@@ -770,6 +1003,9 @@ class Admin extends CI_Controller {
 			$this->db->delete('finance', array('id' => $id));
 		}
 		$this->db->delete('user', array('id_user' => $id));
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Data user berhasil dihapus!
+		  </div>');
 		redirect('admin/user');
 	}
 

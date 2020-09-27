@@ -4,7 +4,7 @@
                 Edit Data Pekerjaan
             </h1>
             <br>
-           <?php echo form_open_multipart('admin/do_upload2'); ?>
+           <?php echo form_open_multipart('admin/do_upload2/'.$p['id_pekerjaan']); ?>
 		<table>
 			<tr>
 				<td></td>
@@ -12,7 +12,7 @@
 			</tr>
 			<tr>
 				<td>Nama Pekerjaan</td>
-				<td><input type="text" name="nama_pekerjaan" value="<?php echo $p['nama_pekerjaan']?>"></td>
+				<td><input type="text" name="nama_pekerjaan" value="<?php echo $p['nama_pekerjaan']?>"><?php echo form_error('nama_pekerjaan');?></td>
 			</tr>
 			<tr>
 				<td>ID PM</td>
@@ -64,8 +64,32 @@
             </tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="Ubah Data"></td>
+				<td><button type="button" class="btnmodal" data-toggle="modal" data-target="#exampleModal">
+  Edit Data
+</button></td>
 			</tr>
+                </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pesan Konfirmasi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Apakah Anda Yakin Ingin Mengubah Data Ini?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" style="padding: 10px; margin-bottom: 6px;" value="Ubah Data">
+      </div>
+    </div>
+  </div>
+</div>
 		</table>
         <?php echo form_close(); ?>
         </div>
