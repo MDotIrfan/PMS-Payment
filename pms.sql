@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jul 2020 pada 08.10
+-- Waktu pembuatan: 28 Sep 2020 pada 03.33
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.3
 
@@ -43,7 +43,7 @@ CREATE TABLE `finance` (
 --
 
 INSERT INTO `finance` (`id`, `nama`, `email_finance`, `alamat`, `jenis_kelamin`, `no_hp`, `foto`) VALUES
-('FN001', 'Putri', 'finstarna2@gmail.com', 'Jln. Siliwangi, Sleman', 'P', '08937463874', 'FN001.jpg');
+('FN001', 'Putri', 'finstarna2@gmail.com', 'Jln. Godean, Sleman', 'P', '0889476583', 'FN0014.jpg');
 
 -- --------------------------------------------------------
 
@@ -72,8 +72,7 @@ CREATE TABLE `freelance` (
 --
 
 INSERT INTO `freelance` (`id`, `nama`, `alamat`, `jenis_kelamin`, `no_telp_fl`, `no_hp_fl`, `email_fl`, `rate`, `bank`, `no_akun`, `bahasa_awal`, `bahasa_akhir`, `foto`) VALUES
-('FL001', 'Muhammad Irfan', 'Jln. Bukit Katapang No. 40, Bandung', 'L', '', '0875754368', 'freelnastar1@gmail.com', 70, 'BCA', '0083637266', 'Inggris', 'Indonesia', 'FL0014.jpg'),
-('FL002', 'Lalu Achmad Wiraharlan', 'Jln. Godean, Sleman', 'L', '', '0877996699', 'freelnastar2@gmail.com', 100, 'BNI', '7846374', 'German', 'Indonesia', 'FL002.jpg');
+('FL001', 'Muhammad Irfan', 'Jln. Ngawen, Sleman', 'L', '', '083816905598', 'freelnastar1@gmail.com', 70, 'BCA', '899667', 'Inggris', 'Indonesia', 'FL0014.jpg');
 
 -- --------------------------------------------------------
 
@@ -92,25 +91,7 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`id_invoice`, `tgl`, `id_po`) VALUES
-('I-06110855am', '2020-06-11', 'PO-TS002'),
-('I-06190556am', '2020-06-19', 'PO-TS003'),
-('I-06190556am', '2020-06-19', 'PO-TS004'),
-('I-06190823am', '2020-06-19', 'PO-TS005'),
-('I-06240512am', '2020-06-24', 'PO-TS006'),
-('I-07010541am', '2020-07-01', 'PO-TS007'),
-('I-07010624am', '2020-07-01', 'PO-TS009'),
-('I-07070909am', '2020-07-07', 'PO-TS010'),
-('I-07070909am', '2020-07-07', 'PO-TS011'),
-('I-07070940am', '2020-07-07', 'PO-TS012'),
-('I-07080524am', '2020-07-08', 'PO-TS008'),
-('I-07080524am', '2020-07-08', 'PO-TS013'),
-('I-07131024pm', '2020-07-13', 'PO-TS014'),
-('I-07131024pm', '2020-07-13', 'PO-TS015'),
-('I-07131035pm', '2020-07-13', 'PO-TS016'),
-('I-07140406am', '2020-07-14', 'PO-TS017'),
-('I-07140555am', '2020-07-14', 'PO-TS018'),
-('I-07140555am', '2020-07-14', 'PO-TS019'),
-('I-07161201pm', '2020-07-16', 'PO-TS021');
+('I-09280329am', '2020-09-28', 'PO-TS001');
 
 -- --------------------------------------------------------
 
@@ -146,26 +127,7 @@ CREATE TABLE `pekerjaan` (
 --
 
 INSERT INTO `pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `id_pm`, `id_fl`, `status`, `file_asal`, `file_selesai`, `detail`, `deadline`, `wc_xtranslated`, `wc_repetition`, `wc_fuzzy100`, `wc_fuzzy95`, `wc_fuzzy85`, `wc_fuzzy75`, `wc_fuzzy50`, `wc_nomatch`, `bahasa_asal`, `bahasa_target`, `currency`) VALUES
-('TS002', 'Project Example 2.1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS002.rar', 'SLSTS002.zip', 'test 2', '2020-06-12', 0, 0, 0, 0, 0, 0, 0, 100, 'German', 'Indonesia', 'IDR'),
-('TS003', 'Project Example 3', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS003.rar', 'SLSTS003.zip', 'test 3', '2020-06-20', 0, 0, 0, 0, 0, 0, 0, 100, 'Inggris', 'Indonesia', 'IDR'),
-('TS004', 'Project Example 4', 'PM002', 'FL001', 'Selesai Pembayaran', 'TS004.pdf', 'SLSTS004.pdf', '', '2020-06-19', 0, 0, 0, 0, 0, 0, 0, 120, 'German', 'Indonesia', 'IDR'),
-('TS005', 'contoh pekerjaan 1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS005.rar', 'SLSTS005.pdf', 'contoh 1', '2020-06-20', 0, 0, 0, 0, 0, 0, 0, 150, 'Inggris', 'Indonesia', 'IDR'),
-('TS006', 'Project Example 7', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS006.rar', 'SLSTS006.pdf', 'contoh pekerjaan 7', '2020-06-24', 0, 0, 0, 0, 0, 0, 0, 260, 'Inggris', 'Indonesia', 'IDR'),
-('TS007', 'Project Example 7', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS007.pdf', 'SLSTS007.pdf', 'testing projek', '2020-07-01', 0, 0, 0, 0, 0, 0, 0, 100, '', '', 'IDR'),
-('TS008', 'Project Example 8', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS008.pdf', 'SLSTS008.zip', 'tes', '2020-07-02', 0, 0, 0, 0, 0, 0, 0, 450, '', '', 'IDR'),
-('TS009', 'Project Example 9', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS009.pdf', 'SLSTS009.pdf', 'tes pekerjaan', '2020-07-02', 0, 0, 0, 0, 0, 0, 0, 100, '', '', 'IDR'),
-('TS010', 'Project Example 10', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS010.pdf', 'SLSTS010.pdf', 'tes pekerjaan', '2020-07-02', 0, 0, 0, 0, 0, 0, 0, 200, '', '', 'IDR'),
-('TS011', 'Project Example 1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS011.rar', 'SLSTS011.zip', 'coba assign projek', '2020-07-09', 0, 0, 0, 0, 0, 0, 0, 100, '', '', 'IDR'),
-('TS012', 'task 1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS012.rar', 'SLSTS012.zip', 'coba assign projek', '2020-07-09', 0, 0, 0, 0, 0, 0, 0, 190, '', '', 'IDR'),
-('TS013', 'Project Example 3', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS013.docx', 'SLSTS013.pdf', 'coba', '2020-07-10', 0, 0, 0, 0, 0, 0, 0, 100, '', '', 'IDR'),
-('TS014', 'Project Example 3', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS014.pdf', 'SLSTS014.zip', 'testing', '2020-07-14', 0, 0, 0, 0, 0, 0, 0, 140, '', '', 'IDR'),
-('TS015', 'coba lagi', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS015.rar', 'SLSTS015.pdf', 'tes', '2020-07-16', 0, 0, 0, 0, 0, 0, 70, 100, '', '', 'IDR'),
-('TS016', 'cobacoba', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS016.pdf', 'SLSTS016.zip', 'tes 1', '2020-07-16', 0, 0, 0, 0, 0, 0, 90, 100, '', '', 'IDR'),
-('TS017', 'coba terakhir', 'PM001', 'FL001', 'Sudah Invoice', 'TS017.rar', 'SLSTS017.pdf', 'ss', '2020-07-15', 0, 0, 0, 0, 0, 0, 20, 189, '', '', 'IDR'),
-('TS018', 'coba terakhir 2', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS018.pdf', 'SLSTS018.zip', 'ssss', '2020-07-16', 0, 0, 0, 0, 0, 0, 0, 120, '', '', 'IDR'),
-('TS019', 'tes pekerjaan 1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS019.rar', 'SLSTS019.pdf', 'coba pekerjaan 1', '2020-07-15', 0, 0, 0, 0, 0, 0, 0, 100, '', '', 'IDR'),
-('TS020', 'tes pekerjaan 2', 'PM001', 'FL002', 'Siap Invoice', 'TS020.pdf', 'SLSTS020.pdf', 'coba pekerjaan 2', '2020-07-15', 0, 0, 0, 0, 0, 0, 100, 230, '', '', 'IDR'),
-('TS021', 'tes pekerjaan 3', 'PM002', 'FL001', 'Sudah Invoice', 'TS021.rar', 'SLSTS021.zip', 'coba pekerjaan 3', '2020-07-15', 0, 0, 0, 0, 0, 0, 0, 5751, '', '', 'IDR');
+('TS001', 'Project Example 1', 'PM001', 'FL001', 'Selesai Pembayaran', 'TS001.rar', 'SLSTS001.pdf', 'Coba pengerjaan', '2020-09-28', 0, 0, 0, 0, 0, 0, 0, 1000, '', '', 'IDR');
 
 -- --------------------------------------------------------
 
@@ -189,8 +151,7 @@ CREATE TABLE `pm` (
 --
 
 INSERT INTO `pm` (`id`, `nama`, `alamat`, `jenis_kelamin`, `no_telp_pm`, `fax_pm`, `email_pm`, `foto`) VALUES
-('PM001', 'Sigit Wibisono', 'Jln. Kaliurang, Sleman', 'L', '0893648637', '0893648783', 'pmstarna1@gmail.com', 'PM001.jpg'),
-('PM002', 'Sikas Rifki', 'Jln. Kenanga, Sleman', 'L', '0894637254', '0876478394', 'pmstarna2@gmail.com', 'PM002.jpg');
+('PM001', 'Sigit Wibisono', 'Jln. Gejayan, Sleman', 'L', '0897577873', '0849374656', 'pmstarna1@gmail.com', 'PM0012.jpg');
 
 -- --------------------------------------------------------
 
@@ -212,26 +173,7 @@ CREATE TABLE `po` (
 --
 
 INSERT INTO `po` (`id_po`, `tgl`, `id_pekerjaan`, `total_bayar`, `id_fl`, `id_pm`) VALUES
-('PO-TS002', '2020-06-11', 'TS002', 7000, 'FL001', 'PM001'),
-('PO-TS003', '2020-06-19', 'TS003', 7000, 'FL001', 'PM001'),
-('PO-TS004', '2020-06-19', 'TS004', 8400, 'FL001', 'PM002'),
-('PO-TS005', '2020-06-19', 'TS005', 10500, 'FL001', 'PM001'),
-('PO-TS006', '2020-06-24', 'TS006', 18200, 'FL001', 'PM001'),
-('PO-TS007', '2020-07-01', 'TS007', 7000, 'FL001', 'PM001'),
-('PO-TS008', '2020-07-01', 'TS008', 31500, 'FL001', 'PM001'),
-('PO-TS009', '2020-07-01', 'TS009', 7000, 'FL001', 'PM001'),
-('PO-TS010', '2020-07-01', 'TS010', 14000, 'FL001', 'PM001'),
-('PO-TS011', '2020-07-07', 'TS011', 7000, 'FL001', 'PM001'),
-('PO-TS012', '2020-07-07', 'TS012', 13300, 'FL001', 'PM001'),
-('PO-TS013', '2020-07-08', 'TS013', 7000, 'FL001', 'PM001'),
-('PO-TS014', '2020-07-13', 'TS014', 100, 'FL001', 'PM001'),
-('PO-TS015', '2020-07-13', 'TS015', 0, 'FL001', 'PM001'),
-('PO-TS016', '2020-07-13', 'TS016', 6790, 'FL001', 'PM001'),
-('PO-TS017', '2020-07-14', 'TS017', 10864, 'FL001', 'PM001'),
-('PO-TS018', '2020-07-14', 'TS018', 8400, 'FL001', 'PM001'),
-('PO-TS019', '2020-07-14', 'TS019', 7000, 'FL001', 'PM001'),
-('PO-TS020', '2020-07-16', 'TS020', 33000, 'FL002', 'PM001'),
-('PO-TS021', '2020-07-16', 'TS021', 402570, 'FL001', 'PM002');
+('PO-TS001', '2020-09-28', 'TS001', 70000, 'FL001', 'PM001');
 
 -- --------------------------------------------------------
 
@@ -252,6 +194,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(35) NOT NULL,
   `password` varchar(35) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `id_user` varchar(10) NOT NULL,
   `level` enum('admin','pm','fl','finance') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -260,13 +203,11 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `id_user`, `level`) VALUES
-(1, 'admin', 'admin', 'AD001', 'admin'),
-(2, 'fl1', 'fl1', 'FL001', 'fl'),
-(3, 'fl2', 'fl2', 'FL002', 'fl'),
-(4, 'pm1', 'pm1', 'PM001', 'pm'),
-(5, 'pm2', 'pm2', 'PM002', 'pm'),
-(6, 'fn1', 'fn1', 'FN001', 'finance');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `id_user`, `level`) VALUES
+(1, 'admin', 'admin', 'admin@gmail.com', 'AD001', 'admin'),
+(12, 'finance1', 'fn1', 'finstarna2@gmail.com', 'FN001', 'finance'),
+(15, 'free1', 'fl1', 'freelnastar1@gmail.com', 'FL001', 'fl'),
+(16, 'proman1', 'pm1', 'pmstarna1@gmail.com', 'PM001', 'pm');
 
 -- --------------------------------------------------------
 
@@ -336,7 +277,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
