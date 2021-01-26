@@ -47,7 +47,12 @@ echo @mdate($format); ?>"></td>
             </tr>
 			<tr>
 				<td></td>
-				<td><button type="button" class="btnmodal" data-toggle="modal" data-target="#exampleModal">
+				<td>
+        <input type="hidden" name="tgl_dibuat" value="<?php $this->load->helper('date');
+
+$format = "%Y-%m-%d";
+echo @mdate($format); ?>">  
+        <button type="button" class="btnmodal" data-toggle="modal" data-target="#exampleModal">
   TAMBAH Data
 </button></td>
 			</tr>

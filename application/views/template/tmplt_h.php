@@ -84,6 +84,12 @@
                         <span class="menu-collapsed">Selesai Pembayaran</span>
                     </a>
                 </div>
+                <a href="<?php echo base_url(); ?>fl/laporan" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Laporan</span>
+                    </div>
+                </a>
                 <?php } ?>
                 <?php if($level['level']=='pm'){ ?>
                 <a href="<?php echo base_url(); ?>pm" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
@@ -116,6 +122,12 @@
                         <span class="menu-collapsed">Selesai Pembayaran</span>
                     </a>
                 </div>
+                <a href="<?php echo base_url(); ?>pm/laporan" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Laporan</span>
+                    </div>
+                </a>
                 <?php } ?>
                 <?php if($level['level']=='admin'){ ?>
                 <a href="<?php echo base_url(); ?>admin" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
@@ -148,6 +160,12 @@
                         <span class="menu-collapsed">User</span>
                     </a>
                 </div>
+                <a href="<?php echo base_url(); ?>admin/laporan" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Laporan</span>
+                    </div>
+                </a>
                 <?php } ?>
                 <?php if($level['level']=='finance'){ ?>
                 <a href="<?php echo base_url(); ?>finance" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
@@ -171,6 +189,12 @@
                         <span class="menu-collapsed">Invoice</span>
                     </a>
                 </div>
+                <a href="<?php echo base_url(); ?>finance/laporan" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Laporan</span>
+                    </div>
+                </a>
                 <!-- <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-tasks fa-fw mr-3"></span>

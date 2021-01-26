@@ -6,6 +6,9 @@ class Fl extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		header('Cache-Control: no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0',false);
+header('Pragma: no-cache');
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('m_pms');
 		$this->load->helper('url_helper');	
@@ -69,6 +72,15 @@ class Fl extends CI_Controller {
 		$this->load->view('fl/views/menunggupo',$data);
 		$this->load->view('template/tmplt_f');
 	}
+
+	public function laporan($id=null) {
+		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['tahun']=$this->db->query("SELECT distinct year(tgl_dibuat) as tahun FROM pekerjaan")->result_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('fl/views/laporan',$data);
+		$this->load->view('template/tmplt_f');
+	} 
 
 	public function siapinvoice($page = 'home')
 	{
@@ -283,5 +295,17 @@ class Fl extends CI_Controller {
 			);
 			$this->m_pms->updatePekerjaan($p['id_pekerjaan'], $data);
 		}
+	}
+
+	function generatelaporan($id=NULL){
+		$data['user'] = $this->db->get_where('freelance', ['id' => $this->session->userdata('id_user')])->row_array();
+		$data['bln'] = $this->uri->segment(3);
+		$data['thun'] = $this->uri->segment(4);
+		// if(empty($data['bln'])&&empty($data['thun'])){
+		// 	$data['pekerjaan']=$this->db->query("SELECT * FROM pekerjaan")->result_array();
+		// } else {
+		// 	$data['pekerjaan']=$this->db->query("SELECT * FROM pekerjaan WHERE MONTH(tgl_dibuat) = '$bln' and year(tgl_dibuat) = '$thun'")->result_array();
+		// }
+		$this->load->view('fl/views/laporan_cetak',$data);
 	}
 }

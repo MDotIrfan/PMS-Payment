@@ -178,15 +178,6 @@ INSERT INTO `po` (`id_po`, `tgl`, `id_pekerjaan`, `total_bayar`, `id_fl`, `id_pm
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `tampil_pekerjaan`
--- (Lihat di bawah untuk tampilan aktual)
---
-CREATE TABLE `tampil_pekerjaan` (
-);
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `user`
 --
 
@@ -208,15 +199,6 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `id_user`, `level`) V
 (12, 'finance1', 'fn1', 'finstarna2@gmail.com', 'FN001', 'finance'),
 (15, 'free1', 'fl1', 'freelnastar1@gmail.com', 'FL001', 'fl'),
 (16, 'proman1', 'pm1', 'pmstarna1@gmail.com', 'PM001', 'pm');
-
--- --------------------------------------------------------
-
---
--- Struktur untuk view `tampil_pekerjaan`
---
-DROP TABLE IF EXISTS `tampil_pekerjaan`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tampil_pekerjaan`  AS  select `pekerjaan`.`id_pekerjaan` AS `id_pekerjaan`,`pekerjaan`.`nama_pekerjaan` AS `nama_pekerjaan`,`pekerjaan`.`total_kata` AS `total_kata`,`pm`.`nama_pm` AS `nama_pm`,`freelance`.`nama_fl` AS `nama_fl`,`pekerjaan`.`status` AS `STATUS` from ((`pekerjaan` join `pm`) join `freelance`) where ((`pekerjaan`.`id_pm` = `pm`.`id_pm`) and (`freelance`.`id_fl` = `pekerjaan`.`id_fl`)) ;
 
 --
 -- Indexes for dumped tables

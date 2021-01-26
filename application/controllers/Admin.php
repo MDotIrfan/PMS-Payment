@@ -6,6 +6,9 @@ class Admin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		header('Cache-Control: no-cache, must-revalidate, max-age=0');
+		header('Cache-Control: post-check=0, pre-check=0',false);
+		header('Pragma: no-cache');
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('m_pms');
 		$this->load->helper('url_helper');	
@@ -17,6 +20,9 @@ class Admin extends CI_Controller {
 	{
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['pekerjaan'] = $this->m_pms->get_datamasterpekerjaan();
+		$data['finance'] = $this->db->get('finance')->result_array();
+		$data['fl'] = $this->db->get('freelance')->result_array();
+		$data['pm'] = $this->db->get('pm')->result_array();
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('admin/'.$page,$data);
 		$this->load->view('template/tmplt_f');
@@ -76,6 +82,14 @@ class Admin extends CI_Controller {
 		$this->load->view('template/tmplt_f');
 	}
 
+	public function laporan($id=null) {
+		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+		$data['tahun']=$this->db->query("SELECT distinct year(tgl_dibuat) as tahun FROM pekerjaan")->result_array();
+		$this->load->view('template/tmplt_h',$data);
+		$this->load->view('admin/laporan',$data);
+		$this->load->view('template/tmplt_f');
+	} 
+
 	public function profilepm($id=NULL) {
 		$data['user'] = $this->db->get_where('pm', ['id' => $id])->row_array();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -99,9 +113,10 @@ class Admin extends CI_Controller {
 		$x['nota']=$this->m_pms->get_idkerja();
 		$data['level'] = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 		$data['pm'] = $this->db->get('pm')->result_array();
-		$data['fl'] = $this->db->get('freelance')->result_array();
+		$data['fl'] =  $this->db->query("SELECT id, id_fl, nama, COUNT(*) AS jumlah FROM pekerjaan JOIN freelance WHERE pekerjaan.`id_fl` = freelance.`id` GROUP BY id_fl ORDER BY jumlah")->result_array();
 		$data['bawal'] = $this->db->select('*')->group_by('bahasa_awal')->get('freelance')->result_array();
 		$data['bakhir'] = $this->db->select('*')->group_by('bahasa_akhir')->get('freelance')->result_array();
+		$data['p'] = $this->db->query("SELECT id_fl, nama, COUNT(*) AS jumlah FROM pekerjaan JOIN freelance WHERE pekerjaan.`id_fl` = freelance.`id` GROUP BY id_fl ORDER BY jumlah")->row_array();
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('admin/tambah',$x);
 		$this->load->view('template/tmplt_f');
@@ -285,6 +300,7 @@ class Admin extends CI_Controller {
 				'currency' => 'IDR',
 				'id_fl' => $this->input->post('id_fl'),
 				'deadline' => $this->input->post('deadline'),
+				'tgl_dibuat' => $this->input->post('tgl_dibuat'),
                 'status' => 'Sedang Dikerjakan',
                 'file_asal' => $result
             );
@@ -1023,5 +1039,16 @@ class Admin extends CI_Controller {
 		$this->load->view('template/tmplt_h',$data);
 		$this->load->view('admin/detail',$data);
 		$this->load->view('template/tmplt_f');
+	}
+
+	function generatelaporan($id=NULL){
+		$data['bln'] = $this->uri->segment(3);
+		$data['thun'] = $this->uri->segment(4);
+		// if(empty($data['bln'])&&empty($data['thun'])){
+		// 	$data['pekerjaan']=$this->db->query("SELECT * FROM pekerjaan")->result_array();
+		// } else {
+		// 	$data['pekerjaan']=$this->db->query("SELECT * FROM pekerjaan WHERE MONTH(tgl_dibuat) = '$bln' and year(tgl_dibuat) = '$thun'")->result_array();
+		// }
+		$this->load->view('admin/laporan_cetak',$data);
 	}
 }
